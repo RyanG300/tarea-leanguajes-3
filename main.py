@@ -18,6 +18,7 @@ def verificar_usuario(nombre, password, window, user_window):
             QMessageBox.information(window, "Inicio de sesión", "¡Inicio de sesión exitoso!")
             window.close()
             user_window.show()
+            layoutAlimentos(crearTipos(), user_window, "Carne")
             return
 
     return QMessageBox.warning(window, "Inicio de sesión", "Nombre de usuario o contraseña incorrectos.")
@@ -50,7 +51,9 @@ def layoutAlimentos(alimentos, user_window, tipo):
         if alimento.tipo == tipo:
             label = f"{alimento.nombre} ({alimento.tipo}) - {alimento.calorias} kcal"
             buttonAgregar = QPushButton("Agregar")
+            buttonAgregar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Agregar Alimento", f"{a.nombre} agregado al plan de comidas."), a.establecer_deseado(True)))
             buttonRechazar = QPushButton("Rechazar")
+            buttonRechazar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Rechazar Alimento", f"{a.nombre} rechazado."), a.establecer_deseado(False)))
 
             grid_layout.addWidget(QLabel(label), row, col)
             grid_layout.addWidget(buttonAgregar, row, col + 1)
@@ -61,6 +64,29 @@ def layoutAlimentos(alimentos, user_window, tipo):
                 row += 1
     container_widget.setLayout(grid_layout)
     user_window.scrollAreaAlimentos.setWidget(container_widget)
+
+def layoutPlatillos(alimento, user_window):
+    if user_window.scrollAreaPlatillos.widget():
+        user_window.scrollAreaPlatillos.widget().deleteLater()
+    container_widget = QWidget()
+    grid_layout = QGridLayout()
+    conexion = sqlite3.connect("dataBase/menu_inteligente_base.db")
+    cursor = conexion.cursor()
+    
+    
+    row = 0
+    col = 0
+
+def habilitarBotonesAlimentos(user_window, cualDesabilitar):
+    botones = { "vegetales": user_window.vegetalesButton,
+                "frutas": user_window.frutasButton,
+                "carnes": user_window.carnesButton,
+                "bebidas_frias": user_window.bebidasFriasButton,
+                "bebidas_calientes": user_window.bebidasCalientesButton,
+                "nose": user_window.pushButton}
+    for key, boton in botones.items():
+        boton.setEnabled(key != cualDesabilitar)
+    
 
 
 def main():
@@ -87,18 +113,29 @@ def main():
         lambda: crear_usuario(window.nombreUsuario.text(), window.passwordUsuario.text(), window, user_window))
     window.show()
 
-
+    #Botones de la ventana de usuario 
     user_window.actionSobre.triggered.connect(
         lambda: QMessageBox.information(user_window, "Sobre", "Aplicación de Menú Saludable Inteligente"))
     user_window.actionSalir.triggered.connect(
-        lambda: (user_window.close(), window.show(),window.nombreUsuario.clear(), window.passwordUsuario.clear()))
+        lambda: (user_window.close(), window.show(),window.nombreUsuario.clear(), 
+                 window.passwordUsuario.clear()))
     user_window.vegetalesButton.clicked.connect(
-        lambda: layoutAlimentos(tipos_alimentos, user_window, "Vegetal"))
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Vegetal"),
+        habilitarBotonesAlimentos(user_window, "vegetales")))
     user_window.frutasButton.clicked.connect(
-        lambda: layoutAlimentos(tipos_alimentos, user_window, "Fruta"))
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Fruta"),
+        habilitarBotonesAlimentos(user_window, "frutas")))
     user_window.carnesButton.clicked.connect(
-        lambda: layoutAlimentos(tipos_alimentos, user_window, "Carne"))
-    
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Carne"),
+        habilitarBotonesAlimentos(user_window, "carnes")))
+    user_window.bebidasFriasButton.clicked.connect(
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Bebidas frías"),
+        habilitarBotonesAlimentos(user_window, "bebidas_frias")))
+    user_window.bebidasCalientesButton.clicked.connect(
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Bebidas calientes"),
+        habilitarBotonesAlimentos(user_window, "bebidas_calientes")))
+
+
     sys.exit(app.exec())
 
             

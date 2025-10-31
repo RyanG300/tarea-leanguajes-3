@@ -1,8 +1,154 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="menu_inteligente_base.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="499"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="usuarios" custom_title="0" dock_id="1" table="4,8:mainusuarios"/><dock_state state="000000ff00000000fd00000001000000020000000000000000fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000011e00ffffff000000000000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="52"/><column index="2" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">create table usuarios(
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="menu_inteligente_base.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1612"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="usuarios" custom_title="0" dock_id="1" table="4,8:mainusuarios"/><dock_state state="000000ff00000000fd00000001000000020000038b00000260fc0100000001fb000000160064006f0063006b00420072006f007700730065003101000000000000038b0000011e00ffffff0000038b0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="52"/><column index="2" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">create table usuarios(
 	nombre text PRIMARY KEY,
 	contraseña text not null
-);
+);
+
+select * from alimentos
+
+
+-- Platillos y sus ingredientes
+create table alimentos(
+	idAlimento integer PRIMARY KEY AUTOINCREMENT,
+	nombre text not null,
+	tipo text not null,
+	calorias int not null
+);
+
+create table platillos(
+	idPlatillo integer PRIMARY KEY AUTOINCREMENT,
+	nombre text not null
+);
+
+create table ingredientePlatillo(
+	idAlimento integer not null,
+	idPlatillo integer not null,
+	CONSTRAINT FK_idAlimento_ingredientePlatillo FOREIGN KEY (idAlimento) REFERENCES alimentos,
+	CONSTRAINT FK_idPlatillo_ingredientePlatillo FOREIGN KEY (idPlatillo) REFERENCES platillos
+);
+
+-- 2) Vista resumen: lista de ingredientes (comma-separated), conteo y total de calorías
+CREATE VIEW IF NOT EXISTS vista_platillos_ingredientes_resumen AS
+SELECT
+  p.idPlatillo,
+  p.nombre AS platillo,
+  COUNT(a.idAlimento) AS cantidad_ingredientes,
+  COALESCE(GROUP_CONCAT(a.nombre, ', '), '') AS ingredientes,
+  COALESCE(SUM(a.calorias), 0) AS total_calorias
+FROM platillos p
+LEFT JOIN ingredientePlatillo ip ON p.idPlatillo = ip.idPlatillo
+LEFT JOIN alimentos a ON ip.idAlimento = a.idAlimento
+GROUP BY p.idPlatillo, p.nombre
+ORDER BY p.idPlatillo;
+
+select * from vista_platillos_ingredientes_resumen 
+
+--Ejemplos de insersiones 
+INSERT INTO alimentos (nombre, tipo, calorias) VALUES
+('Manzana', 'Fruta', 52),
+('Banana', 'Fruta', 89),
+('Naranja', 'Fruta', 47),
+('Fresa', 'Fruta', 32),
+('Uva', 'Fruta', 67),
+('Pollo', 'Carne', 165),
+('Res', 'Carne', 250),
+('Cerdo', 'Carne', 242),
+('Pescado', 'Carne', 206),
+('Pavo', 'Carne', 135),
+('Brócoli', 'Vegetal', 34),
+('Zanahoria', 'Vegetal', 41),
+('Espinaca', 'Vegetal', 23),
+('Tomate', 'Vegetal', 18),
+('Lechuga', 'Vegetal', 15),
+('Agua', 'Bebidas frías', 0),
+('Jugo de naranja', 'Bebidas frías', 112),
+('Refresco', 'Bebidas frías', 140),
+('Agua con gas', 'Bebidas frías', 0),
+('Smoothie', 'Bebidas frías', 150),
+('Café', 'Bebidas calientes', 2),
+('Té verde', 'Bebidas calientes', 2),
+('Chocolate caliente', 'Bebidas calientes', 193),
+('Té de manzanilla', 'Bebidas calientes', 1),
+('Cappuccino', 'Bebidas calientes', 74);
+
+-- 1) Inserciones en platillos
+INSERT INTO platillos (nombre) VALUES
+('Ensalada de pollo'),
+('Filete de res con brócoli'),
+('Smoothie fresa-banana'),
+('Tazón de frutas'),
+('Cerdo asado con ensalada'),
+('Pescado con espinacas'),
+('Ensalada de espinaca y manzana'),
+('Pavo a la plancha con ensalada'),
+('Verduras salteadas'),
+('Combo bebidas calientes');
+
+select * from platillos
+
+-- 2) Asociaciones ingredientePlatillo (idAlimento, idPlatillo)
+-- Ensalada de pollo (idPlatillo = 1)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(6, 1),  -- Pollo
+(15, 1), -- Lechuga
+(14, 1), -- Tomate
+(12, 1); -- Zanahoria
+
+-- Filete de res con brócoli (idPlatillo = 2)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(7, 2),  -- Res
+(11, 2), -- Brócoli
+(12, 2); -- Zanahoria
+
+-- Smoothie fresa-banana (idPlatillo = 3)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(4, 3),  -- Fresa
+(2, 3),  -- Banana
+(17, 3); -- Jugo de naranja (base líquida)
+
+-- Tazón de frutas (idPlatillo = 4)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(1, 4),  -- Manzana
+(2, 4),  -- Banana
+(3, 4),  -- Naranja
+(4, 4),  -- Fresa
+(5, 4);  -- Uva
+
+-- Cerdo asado con ensalada (idPlatillo = 5)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(8, 5),  -- Cerdo
+(15, 5), -- Lechuga
+(14, 5); -- Tomate
+
+-- Pescado con espinacas (idPlatillo = 6)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(9, 6),  -- Pescado
+(13, 6); -- Espinaca
+
+-- Ensalada de espinaca y manzana (idPlatillo = 7)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(13, 7), -- Espinaca
+(1, 7),  -- Manzana
+(5, 7);  -- Uva (toque dulce)
+
+-- Pavo a la plancha con ensalada (idPlatillo = 8)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(10, 8), -- Pavo
+(15, 8), -- Lechuga
+(14, 8); -- Tomate
+
+-- Verduras salteadas (idPlatillo = 9)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(11, 9), -- Brócoli
+(12, 9), -- Zanahoria
+(13, 9), -- Espinaca
+(14, 9); -- Tomate
+
+-- Combo bebidas calientes (idPlatillo = 10)
+INSERT INTO ingredientePlatillo (idAlimento, idPlatillo) VALUES
+(21, 10), -- Café
+(22, 10), -- Té verde
+(25, 10); -- Cappuccino
 
-drop table usuarios
+drop table usuarios
 
 select * from usuarios</sql><current_tab id="0"/></tab_sql></sqlb_project>
