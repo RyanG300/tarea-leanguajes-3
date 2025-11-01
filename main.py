@@ -51,9 +51,13 @@ def layoutAlimentos(alimentos, user_window, tipo):
         if alimento.tipo == tipo:
             label = f"{alimento.nombre} ({alimento.tipo}) - {alimento.calorias} kcal"
             buttonAgregar = QPushButton("Agregar")
-            buttonAgregar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Agregar Alimento", f"{a.nombre} agregado al plan de comidas."), a.establecer_deseado(True)))
+            buttonAgregar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Agregar Alimento", f"{a.nombre} agregado al plan de comidas."), 
+                                            a.establecer_deseado(True),
+                                            layoutPlatillos(a.nombre, user_window)))
             buttonRechazar = QPushButton("Rechazar")
-            buttonRechazar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Rechazar Alimento", f"{a.nombre} rechazado."), a.establecer_deseado(False)))
+            buttonRechazar.clicked.connect(lambda checked, a=alimento: (QMessageBox.information(user_window, "Rechazar Alimento", f"{a.nombre} rechazado."), 
+                                            a.establecer_deseado(False),
+                                            layoutPlatillos(a.nombre, user_window)))
 
             grid_layout.addWidget(QLabel(label), row, col)
             grid_layout.addWidget(buttonAgregar, row, col + 1)
@@ -72,10 +76,23 @@ def layoutPlatillos(alimento, user_window):
     grid_layout = QGridLayout()
     conexion = sqlite3.connect("dataBase/menu_inteligente_base.db")
     cursor = conexion.cursor()
-    
-    
+    cursor.execute('''
+        SELECT platillo, ingredientes, total_calorias from vista_platillos_ingredientes_resumen  
+    ''')
+    platillos = cursor.fetchall()
     row = 0
     col = 0
+    for platillo in platillos:
+        nombre_platillo, ingredientes, total_calorias = platillo
+        if alimento in ingredientes.split(', '):
+            label = f"{nombre_platillo} - Ingredientes: {ingredientes} - Total Calorías: {total_calorias} kcal"
+            grid_layout.addWidget(QLabel(label), row, col)
+            col += 1
+            if col >= 1:
+                col = 0
+                row += 1
+    container_widget.setLayout(grid_layout)
+    user_window.scrollAreaPlatillos.setWidget(container_widget)
 
 def habilitarBotonesAlimentos(user_window, cualDesabilitar):
     botones = { "vegetales": user_window.vegetalesButton,
