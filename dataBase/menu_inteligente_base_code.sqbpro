@@ -26,13 +26,14 @@ create table ingredientePlatillo(
 	CONSTRAINT FK_idPlatillo_ingredientePlatillo FOREIGN KEY (idPlatillo) REFERENCES platillos
 );
 
+drop view vista_platillos_ingredientes_resumen
 -- 2) Vista resumen: lista de ingredientes (comma-separated), conteo y total de calorías
 CREATE VIEW IF NOT EXISTS vista_platillos_ingredientes_resumen AS
 SELECT
   p.idPlatillo,
   p.nombre AS platillo,
   COUNT(a.idAlimento) AS cantidad_ingredientes,
-  COALESCE(GROUP_CONCAT(a.nombre, ', '), '') AS ingredientes,
+  COALESCE(GROUP_CONCAT(a.nombre, ','), '') AS ingredientes,
   COALESCE(SUM(a.calorias), 0) AS total_calorias
 FROM platillos p
 LEFT JOIN ingredientePlatillo ip ON p.idPlatillo = ip.idPlatillo
