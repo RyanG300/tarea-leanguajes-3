@@ -45,3 +45,9 @@ entrada('tartar de salmón', 200, no_vegetariana, 'imagenes/Entradas/tartar.png'
 entrada('humus con pan de pita', 130, vegetariana, 'imagenes/Entradas/humus.png').
 entrada('croquetas de pollo', 160, no_vegetariana, 'imagenes/Entradas/croquetas.png').
 
+% :- dynamic carbohidrato/3.
+% :- dynamic carne/4.
+% :- dynamic vegetal/3.
+% :- dynamic postre/3.
+% :- dynamic entrada/4. 
+
