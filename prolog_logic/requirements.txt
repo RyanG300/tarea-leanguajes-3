@@ -1,0 +1,2 @@
+pyswip==0.3.3
+# Nota: SWI-Prolog (swipl) no se instala con pip; instale con Homebrew: `brew install swi-prolog` if needed.

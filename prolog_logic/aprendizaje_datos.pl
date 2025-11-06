@@ -1,0 +1,26 @@
+
+:- dynamic aceptado/2.
+
+aceptado(daniel, menu('sopa de verduras', 'arroz con verduras', 'pollo en salsa de champiñones', 'brócoli al vapor', 'flan de vainilla', 820)).
+aceptado(daniel, menu('ensalada caprese', 'pasta integral con tomate', 'salmón a la plancha con limón', 'col rizada con limón', 'gelatina de frutas', 780)).
+aceptado(pedro, menu('humus con pan de pita', 'puré de papas con mantequilla', 'gambas al ajillo', 'col rizada con limón', 'gelatina de frutas', 700)).
+aceptado(daniel, menu('sopa de verduras', 'pan integral tostado', 'res al horno con hierbas', 'brócoli al vapor', 'gelatina de frutas', 860)).
+aceptado(daniel, menu('sopa de verduras', 'tortilla de maíz', 'tofu al curry', 'ensalada César', none, 550)).
+aceptado(daniel, menu('tartar de salmón', 'tortilla de maíz', 'tofu al curry', 'pimientos asados', none, 660)).
+aceptado(daniel, menu('tartar de salmón', 'tortilla de maíz', 'tofu al curry', 'ensalada César', none, 750)).
+aceptado(daniel, menu('sopa de verduras', 'puré de papas con mantequilla', 'tofu al curry', 'ensalada César', none, 700)).
+aceptado(luis, menu('sopa de verduras', 'arroz con verduras', 'tempeh a la parrilla', 'pimientos asados', none, 600)).
+
+:- dynamic rechazado/2.
+
+
+:- dynamic regla/2.
+
+regla(daniel, preferencia(carne, vegetariana)).
+regla(daniel, preferencia(postre, none)).
+regla(daniel, preferencia(calorias_promedio, 731.4285714285714)).
+regla(daniel, preferencia(entrada, 'sopa de verduras')).
+regla(daniel, preferencia(vegetal, 'ensalada César')).
+regla(daniel, preferencia(combinacion, (vegetariana, 'ensalada César'))).
+regla(daniel, preferencia_condicional(postre, vegetariana, _)).
+
