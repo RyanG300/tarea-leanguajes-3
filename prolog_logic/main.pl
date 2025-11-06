@@ -1,4 +1,9 @@
-:- consult('base_alimentos.pl').
+:- dynamic carbohidrato/3.
+:- dynamic carne/4.
+:- dynamic vegetal/3.
+:- dynamic entrada/4.
+:- dynamic postre/3.
+
 :- consult('combinaciones.pl').
 :- consult('filtros.pl').
 :- consult('aprendizaje.pl').
