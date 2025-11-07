@@ -72,7 +72,7 @@ base_score(User, M, Acc, Score) :-
 
     ( regla(User, preferencia(carne, TipoP)),
       M = menu(_,_,C,_,_,_),
-      carne(C,_,TipoP)
+      carne(C,_,TipoP,_)
     -> Acc1 is Acc + 3
     ;  Acc1 = Acc ),
 
@@ -115,7 +115,7 @@ base_score(User, M, Acc, Score) :-
 
     ( regla(User, preferencia(combinacion, (TipoFav, VegFav))),
       M = menu(_,_,C,_,_,_),
-      carne(C,_,TipoFav),
+      carne(C,_,TipoFav,_),
       M = menu(_,_,_,VegFav,_,_)
     -> Acc6 is Acc5 + 3
     ;  Acc6 = Acc5 ),
@@ -139,7 +139,7 @@ base_score(User, M, Acc, Score) :-
 
     ( regla(User, preferencia_condicional(postre, Tipo, Pref)),
       M = menu(_,_,C,_,P,_),
-      carne(C,_,Tipo),
+      carne(C,_,Tipo,_),
       (Pref == si, P \= none -> Acc9 is Acc8 + 2 ;
        Pref == no, P == none -> Acc9 is Acc8 + 2 ;
        Acc9 is Acc8 - 1)

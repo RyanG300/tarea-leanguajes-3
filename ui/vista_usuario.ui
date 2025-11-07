@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>650</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,8 +76,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>580</width>
-         <height>124</height>
+         <width>630</width>
+         <height>164</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2"/>
@@ -106,10 +106,18 @@
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="1">
-           <widget class="QSpinBox" name="maxSpinBox"/>
+           <widget class="QSpinBox" name="maxSpinBox">
+            <property name="maximum">
+             <number>9999</number>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QSpinBox" name="minSpinBox"/>
+           <widget class="QSpinBox" name="minSpinBox">
+            <property name="maximum">
+             <number>9999</number>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_4">
@@ -140,6 +148,9 @@
            <widget class="QRadioButton" name="vegetarianoRadioButton">
             <property name="text">
              <string>Vegetariano</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -215,6 +226,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="generarMenusButton">
+          <property name="text">
+           <string>generar menus</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QScrollArea" name="scrollAreaPlatillos">
           <property name="widgetResizable">
            <bool>true</bool>
@@ -224,8 +242,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>326</width>
-             <height>127</height>
+             <width>376</width>
+             <height>108</height>
             </rect>
            </property>
           </widget>
@@ -243,7 +261,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>650</width>
      <height>21</height>
     </rect>
    </property>

@@ -39,7 +39,7 @@ inducir_preferencias(_) :-
 
 inducir_basicas(U) :-
     % Tipo de carne preferido
-    findall(Tipo, (aceptado(U, menu(_,_,C,_,_,_)), carne(C,_,Tipo)), LCarne),
+    findall(Tipo, (aceptado(U, menu(_,_,C,_,_,_)), carne(C,_,Tipo,_)), LCarne),
     (LCarne \= [] ->
         contar_frecuencias(LCarne, FCarne),
         max_member(_-TipoCarne, FCarne),
@@ -93,7 +93,7 @@ inducir_basicas(U) :-
 inducir_combinaciones(U) :-
     findall((Tipo,Veg), (
         aceptado(U, menu(_,_,C,_,_,_)),
-        carne(C,_,Tipo),
+        carne(C,_,Tipo,_),
         aceptado(U, menu(_,_,_,Veg,_,_))
     ), LComb),
     (LComb \= [] ->
@@ -136,7 +136,7 @@ inducir_evitaciones(U) :-
 inducir_condicionales(U) :-
     findall((Tipo,Postre), (
         aceptado(U, menu(_,_,C,_,Postre,_)),
-        carne(C,_,Tipo)
+        carne(C,_,Tipo,_)
     ), LCond),
     (LCond \= [] ->
         contar_frecuencias(LCond, FCond),

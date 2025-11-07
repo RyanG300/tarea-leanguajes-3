@@ -121,7 +121,7 @@ def limpiar_hechos_dinamicos():
     list(prolog.query("retractall(rechazado(_, _))"))
     list(prolog.query("retractall(regla(_, _))"))
 
-if __name__ == "__main__":
+def realizar_carga():
     limpiar_hechos_dinamicos()
     data = fetch_data_from_sqlite('dataBase/menu_inteligente_base.db')
     insert_alimento_into_prolog(data)
@@ -131,9 +131,18 @@ if __name__ == "__main__":
     insert_gustos_into_prolog(gustos_no_usuario)
     reglas = fetch_reglas_from_sqlite('dataBase/menu_inteligente_base.db')
     insert_reglas_into_prolog(reglas)
+
+if __name__ == "__main__":
+    #realizar_carga()
     #for gusto in prolog.query("aceptado(Usuario, Menu)"):
     #    print(gusto)
-    for result in prolog.query("carne(Name, Calories, Type, Image)"):
-        print(result)
+    #for result in prolog.query("carne(Name, Calories, Type, Image)"):
+    #    print(result)
     #for result in prolog.query("regla(Name, Rule)"):
     #    print(result)
+    #"recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champiñones'], ['tarta de chocolate'], 10, Menus)"
+    #"recomendar(daniel, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"
+    #"recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"
+    menus = list(prolog.query("recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"))
+    for resultado in menus:
+        print(resultado)

@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="menu_inteligente_base.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="5955"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="regla_usuarios" custom_title="0" dock_id="1" table="4,14:mainregla_usuarios"/><dock_state state="000000ff00000000fd00000001000000020000037400000260fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000003740000011e00ffffff000003740000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="alimentos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="69"/><column index="2" value="151"/><column index="3" value="143"/><column index="4" value="52"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="disgustos_usuario" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="49"/><column index="2" value="50"/><column index="3" value="146"/><column index="4" value="86"/><column index="5" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="gustos_usuario" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="3" mode="1"/></sort><column_widths><column index="1" value="49"/><column index="2" value="55"/><column index="3" value="156"/><column index="4" value="235"/><column index="5" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="ingredientes_Menu" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="50"/><column index="2" value="69"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="menu" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="49"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="regla_usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="50"/><column index="2" value="55"/><column index="3" value="191"/><column index="4" value="143"/><column index="5" value="215"/><column index="6" value="135"/><column index="7" value="95"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="tipo_detalle" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="82"/><column index="2" value="119"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="52"/><column index="2" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">create table usuarios(
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="menu_inteligente_base.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="5955"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="vista_alimentos_detalle_filas" custom_title="0" dock_id="1" table="4,29:mainvista_alimentos_detalle_filas"/><dock_state state="000000ff00000000fd0000000100000002000003c800000260fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000003c80000012300ffffff000003c80000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="alimentos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="69"/><column index="2" value="151"/><column index="3" value="143"/><column index="4" value="52"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="disgustos_usuario" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="49"/><column index="2" value="50"/><column index="3" value="146"/><column index="4" value="86"/><column index="5" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="gustos_usuario" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="3" mode="1"/></sort><column_widths><column index="1" value="49"/><column index="2" value="55"/><column index="3" value="156"/><column index="4" value="235"/><column index="5" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="ingredientes_Menu" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="50"/><column index="2" value="69"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="menu" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="49"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="regla_usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="50"/><column index="2" value="55"/><column index="3" value="191"/><column index="4" value="143"/><column index="5" value="215"/><column index="6" value="135"/><column index="7" value="95"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="tiene_detalles" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="69"/><column index="2" value="83"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="tipo_detalle" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="82"/><column index="2" value="119"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="usuarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="52"/><column index="2" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="vista_alimentos_detalle_filas" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="69"/><column index="2" value="255"/><column index="3" value="103"/><column index="4" value="52"/><column index="5" value="300"/><column index="6" value="119"/></column_widths><filter_values/><conditional_formats><column index="2"/></conditional_formats><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="vista_menu_completa" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="49"/><column index="2" value="79"/><column index="3" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">create table usuarios(
 	nombre text PRIMARY KEY,
 	contraseña text not null
 );
 
 select * from alimentos
-
---------------------- Alimentos ---------------------
---------------------- Alimentos ---------------------
---------------------- Alimentos ---------------------
+
+--------------------- Alimentos ---------------------
+--------------------- Alimentos ---------------------
+--------------------- Alimentos ---------------------
 
 -- Platillos y sus ingredientes
 create table alimentos(
@@ -23,7 +23,9 @@ create table tiene_detalles(
 	idTipoDetalle INTEGER not null,
 	CONSTRAINT FK_idAlimento_tiene_detalles FOREIGN KEY (idAlimento) REFERENCES alimentos,
 	CONSTRAINT  FK_idTipoDetalle_tiene_detalles FOREIGN KEY (idTipoDetalle) REFERENCES tipo_detalle
-);
+);
+
+DELETE from alimentos
 
 create table tipo_detalle(
 	idTipoDetalle INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,137 +45,139 @@ FROM alimentos a
 LEFT JOIN tiene_detalles h ON a.idAlimento = h.idAlimento
 LEFT JOIN tipo_detalle td ON h.idTipoDetalle = td.idTipoDetalle;
 
-SELECT * from vista_alimentos_detalle_filas
-
---------------------- Gustos (Aceptado/Rechazado) ---------------------
---------------------- Gustos (Aceptado/Rechazado) ---------------------
---------------------- Gustos (Aceptado/Rechazado) ---------------------
-
-create table menu (
-	idMenu integer primary key AUTOINCREMENT,
-	nombre text not null,
-	aceptado integer, -- 0 rechazado, 1 aceptado
-	CONSTRAINT FK_nombre_menu FOREIGN KEY (nombre) REFERENCES usuarios
+SELECT * from vista_alimentos_detalle_filas where tipo='carne' or tipo='entrada'
+
+--------------------- Gustos (Aceptado/Rechazado) ---------------------
+--------------------- Gustos (Aceptado/Rechazado) ---------------------
+--------------------- Gustos (Aceptado/Rechazado) ---------------------
+
+create table menu (
+	idMenu integer primary key AUTOINCREMENT,
+	nombre text not null,
+	aceptado integer, -- 0 rechazado, 1 aceptado
+	CONSTRAINT FK_nombre_menu FOREIGN KEY (nombre) REFERENCES usuarios
+);
+
+create table ingredientes_Menu(
+	idMenu integer not null,
+	idAlimento INTEGER not null,
+	CONSTRAINT FK_idMenu_ingredientes_Menu FOREIGN KEY (idMenu) REFERENCES menu,
+	CONSTRAINT FK_idAlimento_ingredientes_Menu FOREIGN KEY (idAlimento) REFERENCES alimentos
 );
 
-create table ingredientes_Menu(
-	idMenu integer not null,
-	idAlimento INTEGER not null,
-	CONSTRAINT FK_idMenu_ingredientes_Menu FOREIGN KEY (idMenu) REFERENCES menu,
-	CONSTRAINT FK_idAlimento_ingredientes_Menu FOREIGN KEY (idAlimento) REFERENCES alimentos
-);
-
-CREATE VIEW IF NOT EXISTS vista_menu_completa as
-select
-	m.idMenu,
-	COALESCE(GROUP_CONCAT(a.nombre, ','), 'none') as ingredientes,
-	COALESCE(SUM(a.calorias), 0) AS total_calorias
-	from menu as m left JOIN ingredientes_Menu as iM on m.idMenu = iM.idMenu
-	left JOIN alimentos as a on iM.idAlimento = a.idAlimento
-	GROUP BY m.idMenu ORDER BY m.idMenu;
-
-CREATE VIEW gustos_usuario AS
-SELECT
-  m.idMenu,
-  m.nombre           AS usuario,
-  (
-    SELECT GROUP_CONCAT(a.nombre, ', ')
-    FROM ingredientes_Menu im
-    JOIN alimentos a ON im.idAlimento = a.idAlimento
-    WHERE im.idMenu = m.idMenu
-      AND a.nombre IS NOT NULL
-      AND LOWER(TRIM(a.nombre)) != 'none'
-    ORDER BY
-      CASE LOWER(TRIM(a.tipo))
-        WHEN 'entrada' THEN 1
-        WHEN 'carbohidrato' THEN 2
-        WHEN 'carne' THEN 3
-        WHEN 'vegetal' THEN 4
-        WHEN 'postre' THEN 5
-        ELSE 6
-      END,
-      a.nombre
-  ) AS ingredientes_ordenados,
-  COALESCE(
-    (
-      SELECT SUM(a.calorias)
-      FROM ingredientes_Menu im
-      JOIN alimentos a ON im.idAlimento = a.idAlimento
-      WHERE im.idMenu = m.idMenu
-        AND a.nombre IS NOT NULL
-        AND LOWER(TRIM(a.nombre)) != 'none'
-    ), 0
-  ) AS calorias_total,
-  (
-    SELECT COUNT(a.idAlimento)
-    FROM ingredientes_Menu im
-    JOIN alimentos a ON im.idAlimento = a.idAlimento
-    WHERE im.idMenu = m.idMenu
-      AND a.nombre IS NOT NULL
-      AND LOWER(TRIM(a.nombre)) != 'none'
-  ) AS num_ingredientes
-FROM menu m
-WHERE m.aceptado = 1;
-
-CREATE VIEW IF NOT EXISTS disgustos_usuario as 
-SELECT
-  m.idMenu,
-  m.nombre           AS usuario,
-  (
-    SELECT GROUP_CONCAT(a.nombre, ', ')
-    FROM ingredientes_Menu im
-    JOIN alimentos a ON im.idAlimento = a.idAlimento
-    WHERE im.idMenu = m.idMenu
-      AND a.nombre IS NOT NULL
-      AND LOWER(TRIM(a.nombre)) != 'none'
-    ORDER BY
-      CASE LOWER(TRIM(a.tipo))
-        WHEN 'entrada' THEN 1
-        WHEN 'carbohidrato' THEN 2
-        WHEN 'carne' THEN 3
-        WHEN 'vegetal' THEN 4
-        WHEN 'postre' THEN 5
-        ELSE 6
-      END,
-      a.nombre
-  ) AS ingredientes_ordenados,
-  COALESCE(
-    (
-      SELECT SUM(a.calorias)
-      FROM ingredientes_Menu im
-      JOIN alimentos a ON im.idAlimento = a.idAlimento
-      WHERE im.idMenu = m.idMenu
-        AND a.nombre IS NOT NULL
-        AND LOWER(TRIM(a.nombre)) != 'none'
-    ), 0
-  ) AS calorias_total,
-  (
-    SELECT COUNT(a.idAlimento)
-    FROM ingredientes_Menu im
-    JOIN alimentos a ON im.idAlimento = a.idAlimento
-    WHERE im.idMenu = m.idMenu
-      AND a.nombre IS NOT NULL
-      AND LOWER(TRIM(a.nombre)) != 'none'
-  ) AS num_ingredientes
-FROM menu m
-WHERE m.aceptado = 0;
-
-SELECT * from gustos_usuario
-
---------------------- regla ---------------------
---------------------- regla ---------------------
---------------------- regla ---------------------
-
-create table regla_usuarios(
-	idRegla INTEGER PRIMARY KEY AUTOINCREMENT,
-	nombre text not null,
-	tipo_regla TEXT NOT NULL,
-    categoria TEXT,
-    valor TEXT,
-    valor_numerico REAL,
-    condicion TEXT,
-	CONSTRAINT FK_nombre_regla_usuarios FOREIGN KEY(nombre) REFERENCES usuarios
-);
+drop table ingredientes_Menu
+
+CREATE VIEW IF NOT EXISTS vista_menu_completa as
+select
+	m.idMenu,
+	COALESCE(GROUP_CONCAT(a.nombre, ','), 'none') as ingredientes,
+	COALESCE(SUM(a.calorias), 0) AS total_calorias
+	from menu as m left JOIN ingredientes_Menu as iM on m.idMenu = iM.idMenu
+	left JOIN alimentos as a on iM.idAlimento = a.idAlimento
+	GROUP BY m.idMenu ORDER BY m.idMenu;
+
+CREATE VIEW gustos_usuario AS
+SELECT
+  m.idMenu,
+  m.nombre           AS usuario,
+  (
+    SELECT GROUP_CONCAT(a.nombre, ', ')
+    FROM ingredientes_Menu im
+    JOIN alimentos a ON im.idAlimento = a.idAlimento
+    WHERE im.idMenu = m.idMenu
+      AND a.nombre IS NOT NULL
+      AND LOWER(TRIM(a.nombre)) != 'none'
+    ORDER BY
+      CASE LOWER(TRIM(a.tipo))
+        WHEN 'entrada' THEN 1
+        WHEN 'carbohidrato' THEN 2
+        WHEN 'carne' THEN 3
+        WHEN 'vegetal' THEN 4
+        WHEN 'postre' THEN 5
+        ELSE 6
+      END,
+      a.nombre
+  ) AS ingredientes_ordenados,
+  COALESCE(
+    (
+      SELECT SUM(a.calorias)
+      FROM ingredientes_Menu im
+      JOIN alimentos a ON im.idAlimento = a.idAlimento
+      WHERE im.idMenu = m.idMenu
+        AND a.nombre IS NOT NULL
+        AND LOWER(TRIM(a.nombre)) != 'none'
+    ), 0
+  ) AS calorias_total,
+  (
+    SELECT COUNT(a.idAlimento)
+    FROM ingredientes_Menu im
+    JOIN alimentos a ON im.idAlimento = a.idAlimento
+    WHERE im.idMenu = m.idMenu
+      AND a.nombre IS NOT NULL
+      AND LOWER(TRIM(a.nombre)) != 'none'
+  ) AS num_ingredientes
+FROM menu m
+WHERE m.aceptado = 1;
+
+CREATE VIEW IF NOT EXISTS disgustos_usuario as 
+SELECT
+  m.idMenu,
+  m.nombre           AS usuario,
+  (
+    SELECT GROUP_CONCAT(a.nombre, ', ')
+    FROM ingredientes_Menu im
+    JOIN alimentos a ON im.idAlimento = a.idAlimento
+    WHERE im.idMenu = m.idMenu
+      AND a.nombre IS NOT NULL
+      AND LOWER(TRIM(a.nombre)) != 'none'
+    ORDER BY
+      CASE LOWER(TRIM(a.tipo))
+        WHEN 'entrada' THEN 1
+        WHEN 'carbohidrato' THEN 2
+        WHEN 'carne' THEN 3
+        WHEN 'vegetal' THEN 4
+        WHEN 'postre' THEN 5
+        ELSE 6
+      END,
+      a.nombre
+  ) AS ingredientes_ordenados,
+  COALESCE(
+    (
+      SELECT SUM(a.calorias)
+      FROM ingredientes_Menu im
+      JOIN alimentos a ON im.idAlimento = a.idAlimento
+      WHERE im.idMenu = m.idMenu
+        AND a.nombre IS NOT NULL
+        AND LOWER(TRIM(a.nombre)) != 'none'
+    ), 0
+  ) AS calorias_total,
+  (
+    SELECT COUNT(a.idAlimento)
+    FROM ingredientes_Menu im
+    JOIN alimentos a ON im.idAlimento = a.idAlimento
+    WHERE im.idMenu = m.idMenu
+      AND a.nombre IS NOT NULL
+      AND LOWER(TRIM(a.nombre)) != 'none'
+  ) AS num_ingredientes
+FROM menu m
+WHERE m.aceptado = 0;
+
+SELECT * from gustos_usuario
+
+--------------------- regla ---------------------
+--------------------- regla ---------------------
+--------------------- regla ---------------------
+
+create table regla_usuarios(
+	idRegla INTEGER PRIMARY KEY AUTOINCREMENT,
+	nombre text not null,
+	tipo_regla TEXT NOT NULL,
+    categoria TEXT,
+    valor TEXT,
+    valor_numerico REAL,
+    condicion TEXT,
+	CONSTRAINT FK_nombre_regla_usuarios FOREIGN KEY(nombre) REFERENCES usuarios
+);
 
 --------------------- INSERCIONES --------------------- 
 --------------------- INSERCIONES --------------------- 
@@ -191,65 +195,65 @@ SELECT 'vegetariana' WHERE NOT EXISTS (SELECT 1 FROM tipo_detalle WHERE tipoDeta
 INSERT INTO tipo_detalle(tipoDetalle)
 SELECT 'no_vegetariana' WHERE NOT EXISTS (SELECT 1 FROM tipo_detalle WHERE tipoDetalle = 'no_vegetariana');
 
--- 2) Insertar alimentos (carbohidratos)
-INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
-('arroz con verduras', 'carbohidrato', 220, 'imagenes/Carbohidratos/arroz.png'),
-('pasta integral con tomate', 'carbohidrato', 250, 'imagenes/Carbohidratos/pasta.png'),
-('puré de papas con mantequilla', 'carbohidrato', 200, 'imagenes/Carbohidratos/pure.png'),
-('quinoa con frutos secos', 'carbohidrato', 210, 'imagenes/Carbohidratos/quinoa.png'),
-('cuscús marroquí', 'carbohidrato', 230, 'imagenes/Carbohidratos/cuscus.png'),
-('pan integral tostado', 'carbohidrato', 180, 'imagenes/Carbohidratos/pan.png'),
-('tortilla de maíz', 'carbohidrato', 150, 'imagenes/Carbohidratos/tortilla.png'),
-('papas al ajillo', 'carbohidrato', 300, 'imagenes/Carbohidratos/papas.png');
-
--- 3) Insertar alimentos (proteínas / carne)
-INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
-('pollo en salsa de champiñones', 'carne', 350, 'imagenes/Proteínas/pollo.png'),
-('res al horno con hierbas', 'carne', 400, 'imagenes/Proteínas/res.png'),
-('salmón a la plancha con limón', 'carne', 300, 'imagenes/Proteínas/salmon.png'),
-('tofu al curry', 'carne', 250, 'imagenes/Proteínas/tofu.png'),
-('pavo al ajillo', 'carne', 280, 'imagenes/Proteínas/pavo.png'),
-('cerdo estofado', 'carne', 380, 'imagenes/Proteínas/cerdo.png'),
-('tempeh a la parrilla', 'carne', 220, 'imagenes/Proteínas/tempeh.png'),
-('gambas al ajillo', 'carne', 200, 'imagenes/Proteínas/gambas.png');
-
--- 4) Insertar alimentos (vegetales)
-INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
-('ensalada César', 'vegetal', 150, 'imagenes/Vegetales/cesar.png'),
-('brócoli al vapor', 'vegetal', 80, 'imagenes/Vegetales/brocoli.png'),
-('vegetales salteados', 'vegetal', 120, 'imagenes/Vegetales/vegetalesSalteados.png'),
-('col rizada con limón', 'vegetal', 70, 'imagenes/Vegetales/col.png'),
-('espinacas a la crema', 'vegetal', 100, 'imagenes/Vegetales/espinacas.png'),
-('berenjenas a la parmesana', 'vegetal', 130, 'imagenes/Vegetales/berenjenas.png'),
-('calabacín al horno', 'vegetal', 90, 'imagenes/Vegetales/calabacin.png'),
-('pimientos asados', 'vegetal', 60, 'imagenes/Vegetales/pimientos.png');
-
--- 5) Insertar alimentos (postres)
-INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES ('tarta de chocolate', 'postre', 450, 'imagenes/Postres/tarta.png'),
-('flan de vainilla', 'postre', 250, 'imagenes/Postres/flan.png'),
-('helado de fresa', 'postre', 200, 'imagenes/Postres/helado.png'),
-('mousse de chocolate negro', 'postre', 300, 'imagenes/Postres/mousse.png'),
-('fruta fresca con miel', 'postre', 150, 'imagenes/Postres/frutaMiel.png'),
-('pudín de pan', 'postre', 350, 'imagenes/Postres/pudín.png'),
-('brownie de nueces', 'postre', 400, 'imagenes/Postres/brownie.png'),
-('gelatina de frutas', 'postre', 100, 'imagenes/Postres/gelatina.png');
-
--- 6) Insertar alimentos (entradas)
-INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
-('bruschetta de tomate y albahaca', 'entrada', 120, 'imagenes/Entradas/buschetta.png'),
-('sopa de verduras', 'entrada', 100, 'imagenes/Entradas/sopaVerduras.png'),
-('ensalada caprese', 'entrada', 150, 'imagenes/Entradas/caprese.png'),
-('rollitos de jamón y queso', 'entrada', 180, 'imagenes/Entradas/rollitos.png'),
-('gazpacho', 'entrada', 90, 'imagenes/Entradas/gazpacho.png'),
-('tartar de salmón', 'entrada', 200, 'imagenes/Entradas/tartar.png'),
-('humus con pan de pita', 'entrada', 130, 'imagenes/Entradas/humus.png'),
-('croquetas de pollo', 'entrada', 160, 'imagenes/Entradas/croquetas.png');
+-- 2) Insertar alimentos (carbohidratos)
+INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
+('arroz con verduras', 'carbohidrato', 220, 'imagenes/Carbohidratos/arroz.png'),
+('pasta integral con tomate', 'carbohidrato', 250, 'imagenes/Carbohidratos/pasta.png'),
+('pure de papas con mantequilla', 'carbohidrato', 200, 'imagenes/Carbohidratos/pure.png'),
+('quinoa con frutos secos', 'carbohidrato', 210, 'imagenes/Carbohidratos/quinoa.png'),
+('cuscus marroqui', 'carbohidrato', 230, 'imagenes/Carbohidratos/cuscus.png'),
+('pan integral tostado', 'carbohidrato', 180, 'imagenes/Carbohidratos/pan.png'),
+('tortilla de maiz', 'carbohidrato', 150, 'imagenes/Carbohidratos/tortilla.png'),
+('papas al ajillo', 'carbohidrato', 300, 'imagenes/Carbohidratos/papas.png');
+
+-- 3) Insertar alimentos (proteínas / carne)
+INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
+('pollo en salsa de champinones', 'carne', 350, 'imagenes/Proteínas/pollo.png'),
+('res al horno con hierbas', 'carne', 400, 'imagenes/Proteínas/res.png'),
+('salmon a la plancha con limon', 'carne', 300, 'imagenes/Proteínas/salmon.png'),
+('tofu al curry', 'carne', 250, 'imagenes/Proteínas/tofu.png'),
+('pavo al ajillo', 'carne', 280, 'imagenes/Proteínas/pavo.png'),
+('cerdo estofado', 'carne', 380, 'imagenes/Proteínas/cerdo.png'),
+('tempeh a la parrilla', 'carne', 220, 'imagenes/Proteínas/tempeh.png'),
+('gambas al ajillo', 'carne', 200, 'imagenes/Proteínas/gambas.png');
+
+-- 4) Insertar alimentos (vegetales)
+INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
+('ensalada Cesar', 'vegetal', 150, 'imagenes/Vegetales/cesar.png'),
+('brocoli al vapor', 'vegetal', 80, 'imagenes/Vegetales/brocoli.png'),
+('vegetales salteados', 'vegetal', 120, 'imagenes/Vegetales/vegetalesSalteados.png'),
+('col rizada con limon', 'vegetal', 70, 'imagenes/Vegetales/col.png'),
+('espinacas a la crema', 'vegetal', 100, 'imagenes/Vegetales/espinacas.png'),
+('berenjenas a la parmesana', 'vegetal', 130, 'imagenes/Vegetales/berenjenas.png'),
+('calabacin al horno', 'vegetal', 90, 'imagenes/Vegetales/calabacin.png'),
+('pimientos asados', 'vegetal', 60, 'imagenes/Vegetales/pimientos.png');
+
+-- 5) Insertar alimentos (postres)
+INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES ('tarta de chocolate', 'postre', 450, 'imagenes/Postres/tarta.png'),
+('flan de vainilla', 'postre', 250, 'imagenes/Postres/flan.png'),
+('helado de fresa', 'postre', 200, 'imagenes/Postres/helado.png'),
+('mousse de chocolate negro', 'postre', 300, 'imagenes/Postres/mousse.png'),
+('fruta fresca con miel', 'postre', 150, 'imagenes/Postres/frutaMiel.png'),
+('pudin de pan', 'postre', 350, 'imagenes/Postres/pudín.png'),
+('brownie de nueces', 'postre', 400, 'imagenes/Postres/brownie.png'),
+('gelatina de frutas', 'postre', 100, 'imagenes/Postres/gelatina.png');
+
+-- 6) Insertar alimentos (entradas)
+INSERT INTO alimentos(nombre, tipo, calorias, imagen) VALUES 
+('bruschetta de tomate y albahaca', 'entrada', 120, 'imagenes/Entradas/buschetta.png'),
+('sopa de verduras', 'entrada', 100, 'imagenes/Entradas/sopaVerduras.png'),
+('ensalada caprese', 'entrada', 150, 'imagenes/Entradas/caprese.png'),
+('rollitos de jamon y queso', 'entrada', 180, 'imagenes/Entradas/rollitos.png'),
+('gazpacho', 'entrada', 90, 'imagenes/Entradas/gazpacho.png'),
+('tartar de salmon', 'entrada', 200, 'imagenes/Entradas/tartar.png'),
+('humus con pan de pita', 'entrada', 130, 'imagenes/Entradas/humus.png'),
+('croquetas de pollo', 'entrada', 160, 'imagenes/Entradas/croquetas.png');
 
 -- 7) Relacionar alimentos con tipo_detalle (para los que tienen un dato extra)
 -- Proteínas / carnes
 INSERT INTO tiene_detalles(idAlimento, idTipoDetalle)
 VALUES (
-  (SELECT idAlimento FROM alimentos WHERE nombre = 'pollo en salsa de champiñones'),
+  (SELECT idAlimento FROM alimentos WHERE nombre = 'pollo en salsa de champinones'),
   (SELECT idTipoDetalle FROM tipo_detalle WHERE tipoDetalle = 'blanca')
 );
 
@@ -261,7 +265,7 @@ VALUES (
 
 INSERT INTO tiene_detalles(idAlimento, idTipoDetalle)
 VALUES (
-  (SELECT idAlimento FROM alimentos WHERE nombre = 'salmón a la plancha con limón'),
+  (SELECT idAlimento FROM alimentos WHERE nombre = 'salmon a la plancha con limon'),
   (SELECT idTipoDetalle FROM tipo_detalle WHERE tipoDetalle = 'blanca')
 );
 
@@ -316,7 +320,7 @@ VALUES (
 
 INSERT INTO tiene_detalles(idAlimento, idTipoDetalle)
 VALUES (
-  (SELECT idAlimento FROM alimentos WHERE nombre = 'rollitos de jamón y queso'),
+  (SELECT idAlimento FROM alimentos WHERE nombre = 'rollitos de jamon y queso'),
   (SELECT idTipoDetalle FROM tipo_detalle WHERE tipoDetalle = 'no_vegetariana')
 );
 
@@ -328,7 +332,7 @@ VALUES (
 
 INSERT INTO tiene_detalles(idAlimento, idTipoDetalle)
 VALUES (
-  (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmón'),
+  (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmon'),
   (SELECT idTipoDetalle FROM tipo_detalle WHERE tipoDetalle = 'no_vegetariana')
 );
 
@@ -342,96 +346,97 @@ INSERT INTO tiene_detalles(idAlimento, idTipoDetalle)
 VALUES (
   (SELECT idAlimento FROM alimentos WHERE nombre = 'croquetas de pollo'),
   (SELECT idTipoDetalle FROM tipo_detalle WHERE tipoDetalle = 'no_vegetariana')
-);
+);
+
+-- usuarios 
+INSERT OR IGNORE INTO usuarios(nombre, contraseña) VALUES ('daniel', '123'),
+('pedro', '123'),
+('luis',  '123');
+
+-- 1
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (1, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
+(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'arroz con verduras')),
+(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'pollo en salsa de champinones')),
+(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'brocoli al vapor')),
+(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'flan de vainilla'));
+
+-- 2
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (2, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada caprese')),
+(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'pasta integral con tomate')),
+(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'salmon a la plancha con limon')),
+(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'col rizada con limon')),
+(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
 
--- usuarios 
-INSERT OR IGNORE INTO usuarios(nombre, contraseña) VALUES ('daniel', '123'),
-('pedro', '123'),
-('luis',  '123');
-
--- 1
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (1, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
-(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'arroz con verduras')),
-(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'pollo en salsa de champiñones')),
-(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'brócoli al vapor')),
-(1, (SELECT idAlimento FROM alimentos WHERE nombre = 'flan de vainilla'));
-
--- 2
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (2, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada caprese')),
-(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'pasta integral con tomate')),
-(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'salmón a la plancha con limón')),
-(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'col rizada con limón')),
-(2, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
-
--- 3
-INSERT INTO menu(nombre, aceptado) VALUES ('pedro', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (3, (SELECT idAlimento FROM alimentos WHERE nombre = 'humus con pan de pita')),
-(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'puré de papas con mantequilla')),
-(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'gambas al ajillo')),
-(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'col rizada con limón')),
-(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
-
--- 4
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (4, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
-(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'pan integral tostado')),
-(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'res al horno con hierbas')),
-(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'brócoli al vapor')),
-(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
-
--- 5  (tiene 'none' como postre -&gt; no insertar 'none')
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (5, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
-(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maíz')),
-(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
-(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada César'));
--- postre 'none' -&gt; omitido
-
--- 6
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmón')),
-(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maíz')),
-(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
-(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'pimientos asados'));
--- postre 'none' -&gt; omitido
-
--- 7
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmón')),
-(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maíz')),
-(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
-(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada César'));
--- postre 'none' -&gt; omitido
-
--- 8
-INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (8, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
-(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'puré de papas con mantequilla')),
-(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
-(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada César'));
--- postre 'none' -&gt; omitido
-
--- 9
-INSERT INTO menu(nombre, aceptado) VALUES ('luis', 1);
-INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (9, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
-(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'arroz con verduras')),
-(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'tempeh a la parrilla')),
-(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'pimientos asados'));
+
+-- 3
+INSERT INTO menu(nombre, aceptado) VALUES ('pedro', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (3, (SELECT idAlimento FROM alimentos WHERE nombre = 'humus con pan de pita')),
+(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'pure de papas con mantequilla')),
+(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'gambas al ajillo')),
+(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'col rizada con limon')),
+(3, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
+
+-- 4
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (4, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
+(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'pan integral tostado')),
+(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'res al horno con hierbas')),
+(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'brocoli al vapor')),
+(4, (SELECT idAlimento FROM alimentos WHERE nombre = 'gelatina de frutas'));
+
+-- 5  (tiene 'none' como postre -&gt; no insertar 'none')
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (5, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
+(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maiz')),
+(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
+(5, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada Cesar'));
 -- postre 'none' -&gt; omitido
-
-BEGIN TRANSACTION;
-
-INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion) VALUES
-('daniel', 'preferencia', 'carne', 'vegetariana', NULL, NULL),
-('daniel', 'preferencia', 'postre', 'none', NULL, NULL),
-('daniel', 'preferencia', 'calorias_promedio', NULL, 731.4285714285714, NULL),
-('daniel', 'preferencia', 'entrada', 'sopa de verduras', NULL, NULL),
-('daniel', 'preferencia', 'vegetal', 'ensalada César', NULL, NULL),
-('daniel', 'preferencia', 'combinacion', 'vegetariana,ensalada César', NULL, NULL),
-('daniel', 'preferencia_condicional', 'postre', '_', NULL, 'vegetariana');
-
+
+-- 6
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmon')),
+(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maiz')),
+(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
+(6, (SELECT idAlimento FROM alimentos WHERE nombre = 'pimientos asados'));
+-- postre 'none' -&gt; omitido
+
+-- 7
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tartar de salmon')),
+(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tortilla de maiz')),
+(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
+(7, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada Cesar'));
+-- postre 'none' -&gt; omitido
+
+-- 8
+INSERT INTO menu(nombre, aceptado) VALUES ('daniel', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (8, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
+(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'pure de papas con mantequilla')),
+(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'tofu al curry')),
+(8, (SELECT idAlimento FROM alimentos WHERE nombre = 'ensalada Cesar'));
+-- postre 'none' -&gt; omitido
+
+-- 9
+INSERT INTO menu(nombre, aceptado) VALUES ('luis', 1);
+INSERT INTO ingredientes_Menu(idMenu, idAlimento) VALUES (9, (SELECT idAlimento FROM alimentos WHERE nombre = 'sopa de verduras')),
+(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'arroz con verduras')),
+(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'tempeh a la parrilla')),
+(9, (SELECT idAlimento FROM alimentos WHERE nombre = 'pimientos asados'));
+-- postre 'none' -&gt; omitido
+
+BEGIN TRANSACTION;
+
+INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion) VALUES
+('daniel', 'preferencia', 'carne', 'vegetariana', NULL, NULL),
+('daniel', 'preferencia', 'postre', 'none', NULL, NULL),
+('daniel', 'preferencia', 'calorias_promedio', NULL, 731.4285714285714, NULL),
+('daniel', 'preferencia', 'entrada', 'sopa de verduras', NULL, NULL),
+('daniel', 'preferencia', 'vegetal', 'ensalada César', NULL, NULL),
+('daniel', 'preferencia', 'combinacion', 'vegetariana,ensalada César', NULL, NULL),
+('daniel', 'preferencia_condicional', 'postre', '_', NULL, 'vegetariana');
+
 COMMIT;
 
 
