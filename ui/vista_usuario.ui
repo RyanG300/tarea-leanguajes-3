@@ -20,13 +20,6 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Nose</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="carnesButton">
         <property name="enabled">
@@ -45,23 +38,23 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QPushButton" name="frutasButton">
+       <widget class="QPushButton" name="carbohidratosButton">
         <property name="text">
-         <string>Frutas</string>
+         <string>Carbohidratos</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="bebidasFriasButton">
+       <widget class="QPushButton" name="entradasButton">
         <property name="text">
-         <string>Bebidas frias</string>
+         <string>Entradas</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="bebidasCalientesButton">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="postresButton">
         <property name="text">
-         <string>Bebidas calientes</string>
+         <string>postres</string>
         </property>
        </widget>
       </item>
@@ -84,7 +77,7 @@
          <x>0</x>
          <y>0</y>
          <width>580</width>
-         <height>139</height>
+         <height>124</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2"/>
@@ -159,6 +152,45 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Preferencia de carne:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QRadioButton" name="anyCarneRadioButton">
+            <property name="text">
+             <string>Any</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="carneBlancaRadioButton">
+            <property name="text">
+             <string>Blanca</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="carneRojaRadioButton">
+            <property name="text">
+             <string>Roja</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="carneVegetarianaRadioButton">
+            <property name="text">
+             <string>Vegetariana</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </item>
       <item>
@@ -192,8 +224,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>408</width>
-             <height>112</height>
+             <width>326</width>
+             <height>127</height>
             </rect>
            </property>
           </widget>

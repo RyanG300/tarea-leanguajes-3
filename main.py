@@ -2,7 +2,7 @@ import sys
 from PySide6.QtWidgets import *
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from tipoAlimento import crearTipos
+from insertarEnProlog import *
 import sqlite3
 
 
@@ -18,7 +18,7 @@ def verificar_usuario(nombre, password, window, user_window):
             QMessageBox.information(window, "Inicio de sesión", "¡Inicio de sesión exitoso!")
             window.close()
             user_window.show()
-            layoutAlimentos(crearTipos(), user_window, "Carne")
+            layoutAlimentos(fetch_data_from_sqlite('dataBase/menu_inteligente_base.db'), user_window, "carne")
             return
 
     return QMessageBox.warning(window, "Inicio de sesión", "Nombre de usuario o contraseña incorrectos.")
@@ -59,11 +59,12 @@ def layoutAlimentos(alimentos, user_window, tipo):
                                             a.establecer_deseado(False),
                                             layoutPlatillos(a.nombre, user_window)))
 
-            grid_layout.addWidget(QLabel(label), row, col)
-            grid_layout.addWidget(buttonAgregar, row, col + 1)
-            grid_layout.addWidget(buttonRechazar, row, col + 2)
-            col += 3
-            if col >= 3:
+            grid_layout.addWidget(QLabel(f"<img src='{alimento.imagen}' width='100' height='100'>"), row, col)
+            grid_layout.addWidget(QLabel(label), row, col + 1)
+            grid_layout.addWidget(buttonAgregar, row, col + 2)
+            grid_layout.addWidget(buttonRechazar, row, col + 3)
+            col += 4
+            if col >= 4:
                 col = 0
                 row += 1
     container_widget.setLayout(grid_layout)
@@ -96,11 +97,10 @@ def layoutPlatillos(alimento, user_window):
 
 def habilitarBotonesAlimentos(user_window, cualDesabilitar):
     botones = { "vegetales": user_window.vegetalesButton,
-                "frutas": user_window.frutasButton,
+                "carbohidratos": user_window.carbohidratosButton,
                 "carnes": user_window.carnesButton,
-                "bebidas_frias": user_window.bebidasFriasButton,
-                "bebidas_calientes": user_window.bebidasCalientesButton,
-                "nose": user_window.pushButton}
+                "postres": user_window.postresButton,
+                "entradas": user_window.entradasButton}
     for key, boton in botones.items():
         boton.setEnabled(key != cualDesabilitar)
     
@@ -108,7 +108,7 @@ def habilitarBotonesAlimentos(user_window, cualDesabilitar):
 
 def main():
     app = QApplication(sys.argv)
-    tipos_alimentos = crearTipos()
+    tipos_alimentos = fetch_data_from_sqlite('dataBase/menu_inteligente_base.db')
     
     # Cargar ventana principal
     loader = QUiLoader()
@@ -137,20 +137,20 @@ def main():
         lambda: (user_window.close(), window.show(),window.nombreUsuario.clear(), 
                  window.passwordUsuario.clear()))
     user_window.vegetalesButton.clicked.connect(
-        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Vegetal"),
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "vegetal"),
         habilitarBotonesAlimentos(user_window, "vegetales")))
-    user_window.frutasButton.clicked.connect(
-        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Fruta"),
-        habilitarBotonesAlimentos(user_window, "frutas")))
+    user_window.carbohidratosButton.clicked.connect(
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "carbohidrato"),
+        habilitarBotonesAlimentos(user_window, "carbohidratos")))
     user_window.carnesButton.clicked.connect(
-        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Carne"),
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "carne"),
         habilitarBotonesAlimentos(user_window, "carnes")))
-    user_window.bebidasFriasButton.clicked.connect(
-        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Bebidas frías"),
-        habilitarBotonesAlimentos(user_window, "bebidas_frias")))
-    user_window.bebidasCalientesButton.clicked.connect(
-        lambda: (layoutAlimentos(tipos_alimentos, user_window, "Bebidas calientes"),
-        habilitarBotonesAlimentos(user_window, "bebidas_calientes")))
+    user_window.postresButton.clicked.connect(
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "postre"),
+        habilitarBotonesAlimentos(user_window, "postres")))
+    user_window.entradasButton.clicked.connect(
+        lambda: (layoutAlimentos(tipos_alimentos, user_window, "entrada"),
+        habilitarBotonesAlimentos(user_window, "entradas")))
 
 
     sys.exit(app.exec())

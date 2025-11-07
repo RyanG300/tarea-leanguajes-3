@@ -1,4 +1,5 @@
 import sqlite3
+from insertarEnProlog import *
 
 class TipoAlimento:
     def __init__(self, nombre: str, tipo: str, calorias: int, deseado = True):

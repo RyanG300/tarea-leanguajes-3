@@ -133,7 +133,7 @@ if __name__ == "__main__":
     insert_reglas_into_prolog(reglas)
     #for gusto in prolog.query("aceptado(Usuario, Menu)"):
     #    print(gusto)
-    #for result in prolog.query("carne(Name, Calories, Type, Image)"):
-    #    print(result)
-    for result in prolog.query("regla(Name, Rule)"):
+    for result in prolog.query("carne(Name, Calories, Type, Image)"):
         print(result)
+    #for result in prolog.query("regla(Name, Rule)"):
+    #    print(result)
