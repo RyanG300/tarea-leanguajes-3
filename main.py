@@ -280,7 +280,7 @@ def layoutAlimentos(alimentos, user_window, tipo):
     alimento_widgets = []
     for alimento in alimentos:
         if alimento.tipo == tipo:
-            label = f"{alimento.nombre} ({alimento.tipo}) - {alimento.calorias} kcal"
+            label = f"{alimento.nombre} ({alimento.tipo} {alimento.tipoDetalle if alimento.tipoDetalle else ''}) - {alimento.calorias} kcal"
             alimento_widget = AlimentoWidget(alimento, user_window)
             alimento_widgets.append(alimento_widget)
             grid_layout.addWidget(QLabel(f"<img src='{alimento.imagen}' width='100' height='100'>"), row, col)
