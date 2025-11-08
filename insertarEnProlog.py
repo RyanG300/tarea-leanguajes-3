@@ -98,18 +98,24 @@ def insert_reglas_into_prolog(data):
     if(not data):
         return
     for regla in data:
-        match regla.tipo_regla:
-            case "preferencia":
-                if regla.categoria == "combinacion":
-                    valor1, valor2 = regla.valor.split(',')
-                    prolog.assertz(f"regla('{regla.nombre}', preferencia(combinacion, ('{valor1}', '{valor2}')))")
-                    continue
-                if regla.valor_numerico is not None:
-                    prolog.assertz(f"regla('{regla.nombre}', preferencia({regla.categoria}, {regla.valor_numerico}))")
-                else:
-                    prolog.assertz(f"regla('{regla.nombre}', preferencia({regla.categoria}, '{regla.valor}'))")
-            case "preferencia_condicional":
-                prolog.assertz(f"regla('{regla.nombre}', preferencia_condicional({regla.categoria}, '{regla.condicion}', '{regla.valor}'))")
+        try:
+            match regla.tipo_regla:
+                case "preferencia":
+                    if regla.categoria == "combinacion":
+                        partes = regla.valor.split(',', 1)  # Solo dividir en 2 partes máximo
+                        if len(partes) == 2:
+                            valor1, valor2 = partes
+                            prolog.assertz(f"regla('{regla.nombre}', preferencia(combinacion, ('{valor1.strip()}', '{valor2.strip()}')))")
+                        continue
+                    if regla.valor_numerico is not None:
+                        prolog.assertz(f"regla('{regla.nombre}', preferencia({regla.categoria}, {regla.valor_numerico}))")
+                    else:
+                        prolog.assertz(f"regla('{regla.nombre}', preferencia({regla.categoria}, '{regla.valor}'))")
+                case "preferencia_condicional":
+                    prolog.assertz(f"regla('{regla.nombre}', preferencia_condicional({regla.categoria}, '{regla.condicion}', '{regla.valor}'))")
+        except Exception as e:
+            print(f"⚠️  Error insertando regla {regla.tipo_regla}: {e}")
+            continue
 
 def limpiar_hechos_dinamicos():
     list(prolog.query("retractall(carne(_, _, _, _))"))
@@ -132,17 +138,276 @@ def realizar_carga():
     reglas = fetch_reglas_from_sqlite('dataBase/menu_inteligente_base.db')
     insert_reglas_into_prolog(reglas)
 
+def guardar_reglas_en_bd(usuario):
+    """
+    Extrae las reglas generadas por inducir_preferencias de Prolog
+    y las guarda en la base de datos SQLite
+    """
+    conexion = sqlite3.connect('dataBase/menu_inteligente_base.db')
+    cursor = conexion.cursor()
+    
+    try:
+        # Primero eliminar reglas existentes del usuario
+        cursor.execute('DELETE FROM regla_usuarios WHERE nombre = ?', (usuario,))
+        
+        # Consultar todas las reglas del usuario en Prolog
+        reglas_prolog = list(prolog.query(f"regla('{usuario}', Regla)"))
+        
+        for regla_data in reglas_prolog:
+            regla = regla_data['Regla']
+            
+            # Parsear diferentes tipos de reglas
+            if regla.startswith('preferencia('):
+                tipo_regla = 'preferencia'
+                contenido = regla[12:-1]  # Remover 'preferencia(' y ')'
+                categoria, valor = parse_preferencia(contenido)
+                
+                cursor.execute('''
+                    INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (usuario, tipo_regla, categoria, valor[0] if isinstance(valor, tuple) else valor, 
+                      valor if isinstance(valor, (int, float)) else None, None))
+                      
+            elif regla.startswith('evita('):
+                tipo_regla = 'evita'
+                ingrediente = regla[6:-1].replace("'", "")
+                
+                cursor.execute('''
+                    INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (usuario, tipo_regla, 'ingrediente', ingrediente, None, None))
+                
+            elif regla.startswith('evita_combinacion('):
+                tipo_regla = 'evita_combinacion'
+                contenido = regla[18:-1]  # Remover 'evita_combinacion(' y ')'
+                ing1, ing2 = contenido.split(',')
+                valor_combinado = f"{ing1.strip().replace("'", "")},{ing2.strip().replace("'", "")}"
+                
+                cursor.execute('''
+                    INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (usuario, tipo_regla, 'combinacion', valor_combinado, None, None))
+                
+            elif regla.startswith('preferencia_condicional('):
+                tipo_regla = 'preferencia_condicional'
+                contenido = regla[24:-1]  # Remover 'preferencia_condicional(' y ')'
+                categoria, condicion, valor = parse_condicional(contenido)
+                
+                cursor.execute('''
+                    INSERT INTO regla_usuarios (nombre, tipo_regla, categoria, valor, valor_numerico, condicion)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                ''', (usuario, tipo_regla, categoria, valor.replace("'", ""), None, condicion.replace("'", "")))
+        
+        conexion.commit()
+        print(f"✅ Reglas de {usuario} guardadas en la base de datos")
+        
+    except Exception as e:
+        conexion.rollback()
+        print(f"❌ Error guardando reglas: {e}")
+    finally:
+        conexion.close()
+
+def parse_preferencia(contenido):
+    """Helper para parsear preferencias"""
+    if ',' in contenido:
+        partes = contenido.split(',', 1)
+        categoria = partes[0].strip()
+        valor_str = partes[1].strip()
+        
+        # Manejar combinaciones (tuplas)
+        if valor_str.startswith('(') and valor_str.endswith(')'):
+            tupla_contenido = valor_str[1:-1]
+            valores = [v.strip().replace("'", "") for v in tupla_contenido.split(',')]
+            return categoria, ','.join(valores)
+        
+        # Manejar números
+        try:
+            valor_num = float(valor_str)
+            return categoria, valor_num
+        except:
+            return categoria, valor_str.replace("'", "")
+    
+    return contenido, None
+
+def parse_condicional(contenido):
+    """Helper para parsear reglas condicionales"""
+    partes = contenido.split(',', 2)
+    if len(partes) == 3:
+        return partes[0].strip(), partes[1].strip(), partes[2].strip()
+    return contenido, None, None
+
+def guardar_menus_en_bd(usuario):
+    """
+    Extrae los menús aceptados y rechazados de Prolog
+    y los guarda en las tablas menu e ingredientes_Menu
+    """
+    import traceback
+    
+    conexion = sqlite3.connect('dataBase/menu_inteligente_base.db')
+    cursor = conexion.cursor()
+    
+    try:
+        # Primero eliminar menús existentes del usuario
+        cursor.execute('DELETE FROM menu WHERE nombre = ?', (usuario,))
+        
+        # Obtener menús aceptados
+        menus_aceptados = list(prolog.query(f"aceptado('{usuario}', Menu)"))
+        
+        for menu_data in menus_aceptados:
+            insertar_menu_completo(cursor, usuario, menu_data['Menu'], True)
+        
+        # Obtener menús rechazados
+        menus_rechazados = list(prolog.query(f"rechazado('{usuario}', Menu)"))
+        
+        for menu_data in menus_rechazados:
+            insertar_menu_completo(cursor, usuario, menu_data['Menu'], False)
+        
+        conexion.commit()
+        print(f"✅ {len(menus_aceptados)} menús aceptados y {len(menus_rechazados)} rechazados de {usuario} guardados en la base de datos")
+        
+    except Exception as e:
+        conexion.rollback()
+        print(f"❌ Error guardando menús: {e}")
+        traceback.print_exc()
+    finally:
+        conexion.close()
+
+def insertar_menu_completo(cursor, usuario, menu_prolog, aceptado):
+    """
+    Inserta un menú completo en las tablas menu e ingredientes_Menu
+    """
+    import traceback
+    
+    try:
+        # Parsear el objeto menu de Prolog
+        menu_str = str(menu_prolog)
+        
+        # Extraer componentes del menú
+        # Formato: menu('entrada', 'carbohidrato', 'carne', 'vegetal', 'postre', calorias)
+        if menu_str.startswith('menu('):
+            # Remover 'menu(' del inicio y ')' del final
+            contenido = menu_str[5:-1]
+            
+            # Dividir por comas, pero cuidando las comillas
+            componentes = parsear_componentes_menu(contenido)
+            
+            if len(componentes) >= 6:
+                entrada = limpiar_comillas(componentes[0])
+                carbohidrato = limpiar_comillas(componentes[1])
+                carne = limpiar_comillas(componentes[2])
+                vegetal = limpiar_comillas(componentes[3])
+                postre = limpiar_comillas(componentes[4])
+                calorias = float(componentes[5].strip())
+                
+                # Insertar en tabla menu
+                cursor.execute('''
+                    INSERT INTO menu (nombre, aceptado)
+                    VALUES (?, ?)
+                ''', (usuario, aceptado))
+                
+                menu_id = cursor.lastrowid
+                
+                # Insertar ingredientes en ingredientes_Menu
+                ingredientes = []
+                if entrada != 'none' and entrada:
+                    id_alimento = obtener_id_alimento(cursor, entrada)
+                    if id_alimento:
+                        ingredientes.append((menu_id, id_alimento))
+                if carbohidrato != 'none' and carbohidrato:
+                    id_alimento = obtener_id_alimento(cursor, carbohidrato)
+                    if id_alimento:
+                        ingredientes.append((menu_id, id_alimento))
+                if carne != 'none' and carne:
+                    id_alimento = obtener_id_alimento(cursor, carne)
+                    if id_alimento:
+                        ingredientes.append((menu_id, id_alimento))
+                if vegetal != 'none' and vegetal:
+                    id_alimento = obtener_id_alimento(cursor, vegetal)
+                    if id_alimento:
+                        ingredientes.append((menu_id, id_alimento))
+                if postre != 'none' and postre:
+                    id_alimento = obtener_id_alimento(cursor, postre)
+                    if id_alimento:
+                        ingredientes.append((menu_id, id_alimento))
+                
+                for ingrediente in ingredientes:
+                    cursor.execute('''
+                        INSERT INTO ingredientes_Menu (idMenu, idAlimento)
+                        VALUES (?, ?)
+                    ''', ingrediente)
+                
+    except Exception as e:
+        print(f"❌ Error insertando menú: {e}")
+        traceback.print_exc()
+        raise
+
+def parsear_componentes_menu(contenido):
+    """
+    Parsea los componentes de un menú manejando comillas correctamente
+    """
+    componentes = []
+    componente_actual = ""
+    dentro_comillas = False
+    
+    for char in contenido:
+        if char == "'" and not dentro_comillas:
+            dentro_comillas = True
+            componente_actual += char
+        elif char == "'" and dentro_comillas:
+            dentro_comillas = False
+            componente_actual += char
+        elif char == "," and not dentro_comillas:
+            componentes.append(componente_actual.strip())
+            componente_actual = ""
+        else:
+            componente_actual += char
+    
+    # Agregar el último componente
+    if componente_actual.strip():
+        componentes.append(componente_actual.strip())
+    
+    return componentes
+
+def limpiar_comillas(texto):
+    """
+    Remueve comillas del inicio y final del texto
+    """
+    texto = texto.strip()
+    if texto.startswith("'") and texto.endswith("'"):
+        return texto[1:-1]
+    return texto
+
+def obtener_id_alimento(cursor, nombre_alimento):
+    """
+    Obtiene el ID de un alimento por su nombre
+    """
+    try:
+        cursor.execute('SELECT idAlimento FROM alimentos WHERE nombre = ?', (nombre_alimento,))
+        resultado = cursor.fetchone()
+        if resultado:
+            return resultado[0]
+        else:
+            return None
+    except Exception as e:
+        return None
+
+def guardar_todo_aprendizaje_en_bd(usuario):
+    """
+    Guarda tanto las reglas como los menús del usuario en la base de datos
+    """
+    try:
+        print(f"💾 Guardando aprendizaje completo de {usuario}...")
+        
+        # Guardar reglas de preferencias
+        guardar_reglas_en_bd(usuario)
+        
+        # Guardar menús aceptados y rechazados
+        guardar_menus_en_bd(usuario)
+        
+        print(f"✅ Aprendizaje completo de {usuario} guardado exitosamente")
+        
+    except Exception as e:
+        print(f"❌ Error guardando aprendizaje: {e}")
+
 if __name__ == "__main__":
-    #realizar_carga()
-    #for gusto in prolog.query("aceptado(Usuario, Menu)"):
-    #    print(gusto)
-    #for result in prolog.query("carne(Name, Calories, Type, Image)"):
-    #    print(result)
-    #for result in prolog.query("regla(Name, Rule)"):
-    #    print(result)
-    #"recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champiñones'], ['tarta de chocolate'], 10, Menus)"
-    #"recomendar(daniel, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"
-    #"recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"
-    menus = list(prolog.query("recomendar(pedito, si, no, any, 100, 1000, ['pollo en salsa de champinones'], ['tarta de chocolate'], 10, Menus)"))
-    for resultado in menus:
-        print(resultado)
+    realizar_carga()

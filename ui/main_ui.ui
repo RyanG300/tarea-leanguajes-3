@@ -6,97 +6,202 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>269</height>
+    <width>450</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Menú Saludable Inteligente</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f0f8ff, stop: 1 #e6f3ff);
+}
+
+QLabel {
+    color: #2c3e50;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 500;
+}
+
+QLineEdit {
+    padding: 8px 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 12px;
+    background-color: white;
+    selection-background-color: #3498db;
+}
+
+QLineEdit:focus {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+}
+
+QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #3498db, stop: 1 #2980b9);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 20px;
+    min-height: 25px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2980b9, stop: 1 #2471a3);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2471a3, stop: 1 #1f618d);
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="iniciarSesion">
+   <widget class="QLabel" name="titleLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>190</y>
-      <width>121</width>
-      <height>31</height>
+      <x>50</x>
+      <y>30</y>
+      <width>350</width>
+      <height>40</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 18px; 
+font-weight: bold; 
+color: #2c3e50;
+margin-bottom: 10px;</string>
+    </property>
     <property name="text">
-     <string>Iniciar sesión</string>
+     <string>🍽️ Menú Saludable Inteligente</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>381</width>
-      <height>21</height>
+      <x>50</x>
+      <y>80</y>
+      <width>350</width>
+      <height>30</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 13px; 
+color: #34495e;</string>
+    </property>
     <property name="text">
-     <string>Bienvenido usuario, digite su nombre de usuario y contraseña:</string>
+     <string>Bienvenido, por favor ingrese sus credenciales:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>90</y>
-      <width>47</width>
-      <height>13</height>
+      <x>80</x>
+      <y>140</y>
+      <width>80</width>
+      <height>25</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 12px; 
+font-weight: 500;</string>
+    </property>
     <property name="text">
-     <string>Nombre:</string>
+     <string>👤 Usuario:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>61</width>
-      <height>20</height>
+      <x>80</x>
+      <y>190</y>
+      <width>80</width>
+      <height>25</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">font-size: 12px; 
+font-weight: 500;</string>
+    </property>
     <property name="text">
-     <string>Contraseña:</string>
+     <string>🔒 Contraseña:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="nombreUsuario">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>90</y>
-      <width>230</width>
-      <height>20</height>
+      <x>170</x>
+      <y>128</y>
+      <width>211</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Ingrese su nombre de usuario</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="passwordUsuario">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>140</y>
-      <width>230</width>
-      <height>20</height>
+      <x>170</x>
+      <y>178</y>
+      <width>211</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Ingrese su contraseña</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="iniciarSesion">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>240</y>
+      <width>130</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Iniciar Sesión</string>
     </property>
    </widget>
    <widget class="QPushButton" name="crearUsuario">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>190</y>
-      <width>121</width>
-      <height>31</height>
+      <x>240</x>
+      <y>240</y>
+      <width>130</width>
+      <height>45</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #27ae60, stop: 1 #229954);
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #229954, stop: 1 #1e8449);
+}</string>
+    </property>
     <property name="text">
-     <string>Crear usuario</string>
+     <string>Crear Usuario</string>
     </property>
    </widget>
   </widget>

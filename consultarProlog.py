@@ -1,7 +1,6 @@
 from pyswip import Prolog
 from insertarEnProlog import *
 
-
 class query_Menus:
     def __init__(self, usuario, postre, vegetariano, tipo_carne,
                  min_calorias, max_calorias,
@@ -9,7 +8,7 @@ class query_Menus:
         usuario_atom = usuario.replace(" ", "_") if usuario else 'anon'
         postre_atom = postre if postre in ("si", "no") else postre
         veg_atom = vegetariano if vegetariano in ("si", "no") else vegetariano
-        #self.crear_reglas_usuario(usuario_atom, evita_ingredientes, incluye_ingredientes)
+        self.crear_reglas_usuario(usuario_atom, evita_ingredientes, incluye_ingredientes)
         incluye_prolog = self.prolog_list_from(incluye_ingredientes)
         evita_prolog = self.prolog_list_from(evita_ingredientes)
         query = (
@@ -33,7 +32,7 @@ class query_Menus:
             safe = ingrediente.replace("'", "''")
             prolog.assertz(f"regla({usuario_atom}, preferencia(incluye, '{safe}'))")
 
-    
+
     def prolog_quote_atom(self, s: str) -> str:
         # Escapar comillas simples duplicándolas para Prolog: e.g. don' -> don''
         safe = str(s).replace("'", "''")
@@ -59,3 +58,22 @@ class query_Menus:
             if len(parts) == 6:
                 return parts
         return None
+    
+    def guardar_datos_usuario_en_prolog(self, usuario, menu_elegido):
+        parsed = self.parse_menu_item(menu_elegido)
+        e, c, x, y, p, cal = parsed      
+        usuario_atom = usuario.replace(" ", "_") if usuario else 'anon'
+        # Preparar átomos Prolog con comillas para cadenas; calorías como número
+        e_a = self.prolog_quote_atom(e)
+        c_a = self.prolog_quote_atom(c)
+        x_a = self.prolog_quote_atom(x)
+        y_a = self.prolog_quote_atom(y)
+        p_a = self.prolog_quote_atom(p)
+        try:
+            cal_val = int(str(cal).strip())
+        except Exception:
+            cal_val = str(cal).strip()
+        menu_term = f"menu({e_a},{c_a},{x_a},{y_a},{p_a},{cal_val})"
+        prolog.assertz(f"aceptado({usuario_atom}, {menu_term})")
+        list(prolog.query(f"inducir_preferencias({usuario_atom})"))
+        list(prolog.query("guardar_datos"))

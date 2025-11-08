@@ -1,0 +1,250 @@
+/* Estilos mejorados para la aplicación Menú Saludable Inteligente */
+
+/* Estilo general para la aplicación */
+QMainWindow {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f8f9fa, stop: 1 #e9ecef);
+    font-family: 'Segoe UI', 'Helvetica', Arial, sans-serif;
+}
+
+/* Estilo para etiquetas */
+QLabel {
+    color: #2c3e50;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 500;
+}
+
+/* Estilo para botones principales */
+QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #3498db, stop: 1 #2980b9);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 16px;
+    min-height: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2980b9, stop: 1 #2471a3);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2471a3, stop: 1 #1f618d);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+QPushButton:disabled {
+    background: #bdc3c7;
+    color: #7f8c8d;
+    box-shadow: none;
+}
+
+/* Estilo para campos de entrada */
+QLineEdit {
+    padding: 8px 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 12px;
+    background-color: white;
+    selection-background-color: #3498db;
+    color: #2c3e50;
+}
+
+QLineEdit:focus {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Estilo para áreas de desplazamiento */
+QScrollArea {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* Estilo para SpinBox */
+QSpinBox {
+    padding: 5px 8px;
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: white;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+QSpinBox:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* Estilo para botones de radio */
+QRadioButton {
+    color: #2c3e50;
+    font-weight: 500;
+    spacing: 8px;
+}
+
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background-color: white;
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background-color: #3498db;
+}
+
+QRadioButton::indicator:hover {
+    border-color: #2980b9;
+}
+
+/* Estilo para cajas de grupo */
+QGroupBox {
+    font-weight: bold;
+    color: #2c3e50;
+    border: 2px solid #bdc3c7;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 15px;
+    padding: 0 8px 0 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* Estilo para la barra de menú */
+QMenuBar {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 500;
+    padding: 2px;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+    background-color: #34495e;
+}
+
+QMenu {
+    background-color: #2c3e50;
+    color: white;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+}
+
+QMenu::item {
+    padding: 8px 20px;
+}
+
+QMenu::item:selected {
+    background-color: #34495e;
+}
+
+/* Estilo para la barra de estado */
+QStatusBar {
+    background-color: #34495e;
+    color: white;
+    font-weight: 500;
+    padding: 4px;
+}
+
+/* Estilos específicos para botones de categorías */
+.category-button-carnes {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e74c3c, stop: 1 #c0392b);
+}
+
+.category-button-carnes:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #c0392b, stop: 1 #a93226);
+}
+
+.category-button-vegetales {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #27ae60, stop: 1 #229954);
+}
+
+.category-button-vegetales:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #229954, stop: 1 #1e8449);
+}
+
+.category-button-carbohidratos {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f39c12, stop: 1 #e67e22);
+}
+
+.category-button-carbohidratos:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e67e22, stop: 1 #d35400);
+}
+
+.category-button-entradas {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #9b59b6, stop: 1 #8e44ad);
+}
+
+.category-button-entradas:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #8e44ad, stop: 1 #7d3c98);
+}
+
+.category-button-postres {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e91e63, stop: 1 #c2185b);
+}
+
+.category-button-postres:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #c2185b, stop: 1 #ad1457);
+}
+
+/* Estilo para botón de generar menús */
+.generate-button {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f39c12, stop: 1 #e67e22);
+    font-size: 14px;
+    min-height: 35px;
+}
+
+.generate-button:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e67e22, stop: 1 #d35400);
+}
+
+/* Estilo para botón de crear usuario */
+.create-user-button {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #27ae60, stop: 1 #229954);
+}
+
+.create-user-button:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #229954, stop: 1 #1e8449);
+}

@@ -3,7 +3,138 @@ from PySide6.QtWidgets import *
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 from consultarProlog import *
+from insertarEnProlog import guardar_todo_aprendizaje_en_bd
 import sqlite3
+
+def cargar_preferencias_usuario(nombre_usuario):
+    """
+    Carga las preferencias guardadas del usuario desde la base de datos
+    """
+    conexion = sqlite3.connect("dataBase/menu_inteligente_base.db")
+    cursor = conexion.cursor()
+    
+    preferencias = {
+        'calorias_min': 0,
+        'calorias_max': 9999,
+        'tipo_carne': 'any',
+        'postre': 'si',
+        'vegetariano': 'no',
+        'alimentos_deseados': [],
+        'alimentos_rechazados': []
+    }
+    
+    try:
+        # Cargar reglas de preferencias
+        cursor.execute('''
+            SELECT tipo_regla, categoria, valor, valor_numerico 
+            FROM regla_usuarios 
+            WHERE nombre = ?
+        ''', (nombre_usuario,))
+        
+        reglas = cursor.fetchall()
+        
+        for regla in reglas:
+            tipo_regla, categoria, valor, valor_numerico = regla
+            
+            if tipo_regla == 'preferencia':
+                if categoria == 'calorias_promedio' and valor_numerico:
+                    # Usar el promedio como base para el rango
+                    promedio = valor_numerico
+                    preferencias['calorias_min'] = max(0, int(promedio - 200))
+                    preferencias['calorias_max'] = int(promedio + 200)
+                
+                elif categoria == 'carne' and valor:
+                    if valor == 'vegetariana':
+                        preferencias['vegetariano'] = 'si'
+                        preferencias['tipo_carne'] = 'vegetariana'
+                    elif valor in ['blanca', 'roja']:
+                        preferencias['tipo_carne'] = valor
+                
+                elif categoria == 'postre' and valor:
+                    preferencias['postre'] = 'si' if valor != 'none' else 'no'
+        
+        # Cargar menús aceptados para inferir preferencias adicionales
+        cursor.execute('''
+            SELECT m.idMenu
+            FROM menu m
+            WHERE m.nombre = ? AND m.aceptado = 1
+            ORDER BY m.idMenu DESC
+            LIMIT 5
+        ''', (nombre_usuario,))
+        
+        menus_recientes = cursor.fetchall()
+        
+        # Analizar patrones en menús recientes
+        if menus_recientes:
+            # Obtener ingredientes más frecuentes
+            menu_ids = [str(menu[0]) for menu in menus_recientes]
+            if menu_ids:
+                cursor.execute(f'''
+                    SELECT a.nombre, COUNT(*) as frecuencia
+                    FROM ingredientes_Menu im
+                    JOIN alimentos a ON im.idAlimento = a.idAlimento
+                    WHERE im.idMenu IN ({','.join(['?' for _ in menu_ids])})
+                    GROUP BY a.nombre
+                    ORDER BY frecuencia DESC
+                    LIMIT 3
+                ''', menu_ids)
+                
+                ingredientes_frecuentes = cursor.fetchall()
+                preferencias['alimentos_deseados'] = [ing[0] for ing in ingredientes_frecuentes]
+        
+    except Exception as e:
+        print(f"Error cargando preferencias: {e}")
+    finally:
+        conexion.close()
+    
+    return preferencias
+
+def aplicar_preferencias_interfaz(user_window, preferencias):
+    """
+    Aplica las preferencias cargadas a la interfaz de usuario
+    """
+    try:
+        # Aplicar configuración de postre
+        if preferencias['postre'] == 'no':
+            if hasattr(user_window, 'sinPostreRadioButton'):
+                user_window.sinPostreRadioButton.setChecked(True)
+        
+        # Aplicar configuración de vegetariano
+        if preferencias['vegetariano'] == 'si':
+            if hasattr(user_window, 'vegetarianoRadioButton'):
+                user_window.vegetarianoRadioButton.setChecked(True)
+        
+        # Aplicar rango de calorías
+        if hasattr(user_window, 'minSpinBox'):
+            user_window.minSpinBox.setValue(preferencias['calorias_min'])
+        
+        if hasattr(user_window, 'maxSpinBox'):
+            user_window.maxSpinBox.setValue(preferencias['calorias_max'])
+        
+        # Aplicar tipo de carne
+        tipo_carne = preferencias['tipo_carne']
+        if tipo_carne == 'any' and hasattr(user_window, 'anyCarneRadioButton'):
+            user_window.anyCarneRadioButton.setChecked(True)
+        elif tipo_carne == 'blanca' and hasattr(user_window, 'carneBlancaRadioButton'):
+            user_window.carneBlancaRadioButton.setChecked(True)
+        elif tipo_carne == 'roja' and hasattr(user_window, 'carneRojaRadioButton'):
+            user_window.carneRojaRadioButton.setChecked(True)
+        elif tipo_carne == 'vegetariana' and hasattr(user_window, 'carneVegetarianaRadioButton'):
+            user_window.carneVegetarianaRadioButton.setChecked(True)
+        
+        # Mostrar alimentos deseados sugeridos
+        if preferencias['alimentos_deseados']:
+            alimentos_texto = ", ".join(preferencias['alimentos_deseados'][:3])  # Solo mostrar los 3 más frecuentes
+            QMessageBox.information(user_window, "Preferencias cargadas", 
+                                  f"🎯 Basándome en tus menús anteriores, te sugiero incluir:\n\n{alimentos_texto}\n\n" +
+                                  f"📊 Configuración aplicada:\n• Calorías: {preferencias['calorias_min']}-{preferencias['calorias_max']}\n" +
+                                  f"• Tipo de carne: {preferencias['tipo_carne']}\n• Postre: {preferencias['postre']}")
+        
+        print(f"✅ Preferencias aplicadas: Calorías {preferencias['calorias_min']}-{preferencias['calorias_max']}, "
+              f"Carne: {preferencias['tipo_carne']}, Postre: {preferencias['postre']}")
+    
+    except Exception as e:
+        print(f"Error aplicando preferencias a la interfaz: {e}")
 
 
 class conexion_actual:
@@ -77,6 +208,7 @@ class AlimentoWidget:
             self.buttonAgregar.setText("Agregar")
 
 usuario_global = None
+menus_actuales = None
 
 def verificar_usuario(nombre, password, window, user_window):
     global usuario_global
@@ -88,10 +220,28 @@ def verificar_usuario(nombre, password, window, user_window):
     usuarios = cursor.fetchall()
     for usuario in usuarios:
         if usuario[0] == nombre and usuario[1] == password:
-            usuario_global = conexion_actual(nombre)
+            # Cargar preferencias del usuario
+            preferencias = cargar_preferencias_usuario(nombre)
+            
+            # Crear conexión actual con preferencias cargadas
+            usuario_global = conexion_actual(
+                nombre, 
+                alimentos_deseados=preferencias['alimentos_deseados'],
+                alimentos_rechazados=preferencias['alimentos_rechazados'],
+                postre=preferencias['postre'],
+                vegetariano=preferencias['vegetariano'],
+                tipo_carne=preferencias['tipo_carne'],
+                min_cal=preferencias['calorias_min'],
+                max_cal=preferencias['calorias_max']
+            )
+            
             QMessageBox.information(window, "Inicio de sesión", "¡Inicio de sesión exitoso!")
             window.close()
             user_window.show()
+            
+            # Aplicar preferencias a la interfaz
+            aplicar_preferencias_interfaz(user_window, preferencias)
+            
             layoutAlimentos(fetch_data_from_sqlite('dataBase/menu_inteligente_base.db'), user_window, "carne")
             return
 
@@ -145,7 +295,6 @@ def layoutAlimentos(alimentos, user_window, tipo):
     container_widget.alimento_widgets = alimento_widgets
     user_window.scrollAreaAlimentos.setWidget(container_widget)
 
-
 def habilitarBotonesAlimentos(user_window, cualDesabilitar):
     botones = { "vegetales": user_window.vegetalesButton,
                 "carbohidratos": user_window.carbohidratosButton,
@@ -154,7 +303,6 @@ def habilitarBotonesAlimentos(user_window, cualDesabilitar):
                 "entradas": user_window.entradasButton}
     for key, boton in botones.items():
         boton.setEnabled(key != cualDesabilitar)
-
 
 def cambiar_estado_vegetariano(nuevo_estado, user_window):
     global usuario_global
@@ -201,8 +349,6 @@ def cambiar_estado_postre(nuevo_estado, user_window):
         layoutAlimentos(fetch_data_from_sqlite('dataBase/menu_inteligente_base.db'), user_window, "postre")
         habilitarBotonesAlimentos(user_window, "postres") 
 
-
-
 def eliminar_tipo_alimento_lista(tipo, lista):
     global usuario_global
     for alimento in usuario_global.alimentos_deseados:
@@ -214,12 +360,91 @@ def eliminar_tipo_alimento_lista(tipo, lista):
             if alimento == item[0]:
                 usuario_global.alimentos_rechazados.remove(alimento)
 
+def seleccionar_menu_con_opciones(user_window, item, menu_label):
+    """
+    Maneja la selección de un menú y ofrece opciones al usuario para continuar o salir
+    """
+    global usuario_global, menus_actuales
+    
+    # Mostrar el menú seleccionado
+    QMessageBox.information(user_window, "Menú Seleccionado", f"Ha seleccionado el menú:\n\n{menu_label}")
+    
+    # Guardar los datos del menú seleccionado
+    menus_actuales.guardar_datos_usuario_en_prolog(usuario_global.nombre, item)
+    guardar_todo_aprendizaje_en_bd(usuario_global.nombre)
+    
+    # Crear diálogo con opciones
+    dialog = QMessageBox(user_window)
+    dialog.setWindowTitle("¿Qué desea hacer ahora?")
+    dialog.setText("Su menú ha sido seleccionado y guardado exitosamente.")
+    dialog.setInformativeText("¿Desea elegir otro menú o salir de la aplicación?")
+    
+    # Agregar botones personalizados
+    boton_otro_menu = dialog.addButton("Elegir otro menú", QMessageBox.ActionRole)
+    boton_salir = dialog.addButton("Salir", QMessageBox.RejectRole)
+    
+    dialog.exec()
+    
+    # Manejar la respuesta del usuario
+    if dialog.clickedButton() == boton_otro_menu:
+        # Limpiar el área de menús para generar nuevos
+        if user_window.scrollAreaMenus.widget():
+            user_window.scrollAreaMenus.widget().deleteLater()
+        # No hacer nada más, el usuario puede configurar nuevas preferencias y generar más menús
+        QMessageBox.information(user_window, "Continuar", "Puede ajustar sus preferencias y generar nuevos menús cuando guste.")
+    elif dialog.clickedButton() == boton_salir:
+        # Cerrar la aplicación completamente
+        user_window.close()
+        QApplication.quit()
+
+def generar_menus(user_window):
+    global usuario_global
+    global menus_actuales
+    if usuario_global is None:
+        QMessageBox.warning(user_window, "Generar Menús", "Debe iniciar sesión primero.")
+        return
+    menus_actuales = query_Menus(
+        usuario_global.nombre,
+        usuario_global.postre,
+        usuario_global.vegetariano,
+        usuario_global.tipo_carne,
+        usuario_global.min_cal,
+        usuario_global.max_cal,
+        usuario_global.alimentos_deseados,
+        usuario_global.alimentos_rechazados
+    )
+    if not menus_actuales.menus:
+        QMessageBox.information(user_window, "Generar Menús", "No se encontraron menús que coincidan con sus preferencias.")
+        return
+    if user_window.scrollAreaMenus.widget():
+        user_window.scrollAreaMenus.widget().deleteLater()
+    container_widget = QWidget()
+    grid_layout = QGridLayout()
+    row = 0
+    col = 0 
+    for resultado in menus_actuales.menus:
+        for item in resultado['Menus']:
+            parsed = menus_actuales.parse_menu_item(item)
+            e, c, x, y, p, cal = parsed
+            e, c, x, y, p = map(lambda s: str(s).replace("_", " "), [e, c, x, y, p])
+            cal = str(cal).strip()
+            label = (f"Entrada: {e}\n"
+                     f"Plato fuerte: {c}, {x}, {y}\n"
+                     f"Postre: {p}\n"
+                     f"Calorías: {cal}")
+            button = QPushButton("Seleccionar")
+            button.clicked.connect(lambda checked, item=item, menu_label=label: seleccionar_menu_con_opciones(user_window, item, menu_label))
+            grid_layout.addWidget(QLabel(label), row, col)
+            grid_layout.addWidget(button, row + 1, col)
+            col += 1
+    container_widget.setLayout(grid_layout)
+    user_window.scrollAreaMenus.setWidget(container_widget)
 
 def main():
     global usuario_global
     app = QApplication(sys.argv)
     tipos_alimentos = fetch_data_from_sqlite('dataBase/menu_inteligente_base.db')
-
+    realizar_carga()
     # Cargar ventana principal
     loader = QUiLoader()
     file = QFile("ui/main_ui.ui")
@@ -311,16 +536,7 @@ def main():
         lambda: generic_RadioButton_handler(user_window.carneVegetarianaRadioButton, 'tipo_carne', 'vegetariana', usuario_global.tipo_carne))
 
     user_window.generarMenusButton.clicked.connect(
-        lambda: query_Menus(
-            usuario_global.nombre,
-            usuario_global.postre,
-            usuario_global.vegetariano,
-            usuario_global.tipo_carne,
-            usuario_global.min_cal,
-            usuario_global.max_cal,
-            usuario_global.alimentos_deseados,
-            usuario_global.alimentos_rechazados
-        )
+        lambda: generar_menus(user_window)
     )
 
     sys.exit(app.exec())

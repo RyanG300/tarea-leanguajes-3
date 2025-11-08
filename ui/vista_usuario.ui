@@ -6,55 +6,214 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>450</height>
+    <width>800</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Menú Saludable Inteligente</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f8f9fa, stop: 1 #e9ecef);
+}
+
+QLabel {
+    color: #2c3e50;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #3498db, stop: 1 #2980b9);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 16px;
+    min-height: 30px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2980b9, stop: 1 #2471a3);
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #2471a3, stop: 1 #1f618d);
+}
+
+QPushButton:disabled {
+    background: #bdc3c7;
+    color: #7f8c8d;
+}
+
+QScrollArea {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background-color: white;
+}
+
+QSpinBox {
+    padding: 5px;
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: white;
+}
+
+QSpinBox:focus {
+    border-color: #3498db;
+}
+
+QRadioButton {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    background-color: white;
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background-color: #3498db;
+}
+
+QGroupBox {
+    font-weight: bold;
+    color: #2c3e50;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <widget class="QLabel" name="welcomeLabel">
+      <property name="styleSheet">
+       <string notr="true">font-size: 16px; 
+font-weight: bold; 
+color: #2c3e50;
+margin: 10px;
+padding: 10px;</string>
+      </property>
+      <property name="text">
+       <string>🍽️ Categorías de Alimentos</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QGridLayout" name="gridLayout">
       <property name="spacing">
-       <number>0</number>
+       <number>10</number>
       </property>
       <item row="0" column="0">
        <widget class="QPushButton" name="carnesButton">
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e74c3c, stop: 1 #c0392b);
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #c0392b, stop: 1 #a93226);
+}</string>
+        </property>
         <property name="text">
-         <string>Carnes</string>
+         <string>🥩 Carnes</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="vegetalesButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #27ae60, stop: 1 #229954);
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #229954, stop: 1 #1e8449);
+}</string>
+        </property>
         <property name="text">
-         <string>Vegetales</string>
+         <string>🥬 Vegetales</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="carbohidratosButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f39c12, stop: 1 #e67e22);
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e67e22, stop: 1 #d35400);
+}</string>
+        </property>
         <property name="text">
-         <string>Carbohidratos</string>
+         <string>🍞 Carbohidratos</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="entradasButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #9b59b6, stop: 1 #8e44ad);
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #8e44ad, stop: 1 #7d3c98);
+}</string>
+        </property>
         <property name="text">
-         <string>Entradas</string>
+         <string>🥗 Entradas</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="postresButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e91e63, stop: 1 #c2185b);
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #c2185b, stop: 1 #ad1457);
+}</string>
+        </property>
         <property name="text">
-         <string>postres</string>
+         <string>🍰 Postres</string>
         </property>
        </widget>
       </item>
@@ -65,7 +224,7 @@
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>0</height>
+        <height>120</height>
        </size>
       </property>
       <property name="widgetResizable">
@@ -76,8 +235,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>630</width>
-         <height>164</height>
+         <width>778</width>
+         <height>116</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2"/>
@@ -87,187 +246,271 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Rango de calorias:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="maxSpinBox">
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QSpinBox" name="minSpinBox">
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Mínimo:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Máximo:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Otras opciones:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QRadioButton" name="vegetarianoRadioButton">
-            <property name="text">
-             <string>Vegetariano</string>
-            </property>
-            <property name="autoExclusive">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="sinPostreRadioButton">
-            <property name="text">
-             <string>Sin postre</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Preferencia de carne:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QRadioButton" name="anyCarneRadioButton">
-            <property name="text">
-             <string>Any</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="carneBlancaRadioButton">
-            <property name="text">
-             <string>Blanca</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="carneRojaRadioButton">
-            <property name="text">
-             <string>Roja</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="carneVegetarianaRadioButton">
-            <property name="text">
-             <string>Vegetariana</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-            <underline>false</underline>
-           </font>
-          </property>
-          <property name="text">
-           <string>Platillos según especificaciones:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="generarMenusButton">
-          <property name="text">
-           <string>generar menus</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QScrollArea" name="scrollAreaPlatillos">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_4">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>376</width>
-             <height>108</height>
-            </rect>
+       <widget class="QGroupBox" name="preferencesGroupBox">
+        <property name="title">
+         <string>⚙️ Preferencias</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Segoe UI,Arial,sans-serif</family>
+            </font>
+           </property>
+           <property name="text">
+            <string>📊 Rango de calorías:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
-         </widget>
-        </item>
-       </layout>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="maxSpinBox">
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+             <property name="value">
+              <number>2000</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QSpinBox" name="minSpinBox">
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+             <property name="value">
+              <number>200</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="styleSheet">
+              <string notr="true">font-weight: 500;</string>
+             </property>
+             <property name="text">
+              <string>Mínimo:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_5">
+             <property name="styleSheet">
+              <string notr="true">font-weight: 500;</string>
+             </property>
+             <property name="text">
+              <string>Máximo:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="styleSheet">
+            <string notr="true">font-weight: bold; margin-top: 10px;</string>
+           </property>
+           <property name="text">
+            <string>🌱 Opciones especiales:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QRadioButton" name="vegetarianoRadioButton">
+             <property name="text">
+              <string>🥕 Vegetariano</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="sinPostreRadioButton">
+             <property name="text">
+              <string>🚫 Sin postre</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="styleSheet">
+            <string notr="true">font-weight: bold; margin-top: 10px;</string>
+           </property>
+           <property name="text">
+            <string>🥩 Preferencia de carne:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QRadioButton" name="anyCarneRadioButton">
+             <property name="text">
+              <string>Cualquiera</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="carneBlancaRadioButton">
+             <property name="text">
+              <string>Blanca</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="carneRojaRadioButton">
+             <property name="text">
+              <string>Roja</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="carneVegetarianaRadioButton">
+             <property name="text">
+              <string>Vegetariana</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="menusGroupBox">
+        <property name="title">
+         <string>🍽️ Generador de Menús</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <family>Segoe UI,Arial,sans-serif</family>
+            </font>
+           </property>
+           <property name="text">
+            <string>📋 Platillos según especificaciones:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="generarMenusButton">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #f39c12, stop: 1 #e67e22);
+    font-size: 14px;
+    min-height: 35px;
+}
+QPushButton:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #e67e22, stop: 1 #d35400);
+}</string>
+           </property>
+           <property name="text">
+            <string>✨ Generar Menús</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="scrollAreaMenus">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_4">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>409</width>
+              <height>196</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="styleSheet">
+    <string notr="true">QStatusBar {
+    background-color: #34495e;
+    color: white;
+    font-weight: 500;
+}</string>
+   </property>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
-     <height>21</height>
+     <width>800</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 500;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 4px 8px;
+}
+
+QMenuBar::item:selected {
+    background-color: #34495e;
+    border-radius: 4px;
+}
+
+QMenu {
+    background-color: #2c3e50;
+    color: white;
+    border: 1px solid #34495e;
+}
+
+QMenu::item {
+    padding: 5px 20px;
+}
+
+QMenu::item:selected {
+    background-color: #34495e;
+}</string>
    </property>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>📚 Ayuda</string>
     </property>
     <addaction name="actionSobre"/>
     <addaction name="actionSalir"/>
@@ -276,12 +519,12 @@
   </widget>
   <action name="actionSobre">
    <property name="text">
-    <string>Sobre</string>
+    <string>ℹ️ Acerca de</string>
    </property>
   </action>
   <action name="actionSalir">
    <property name="text">
-    <string>Cerrar sesión</string>
+    <string>🚪 Cerrar Sesión</string>
    </property>
   </action>
  </widget>
